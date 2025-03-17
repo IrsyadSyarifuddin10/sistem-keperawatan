@@ -72,12 +72,3 @@ sikep/
 
 ---
 
-## 🏗 Kontribusi
-
-Kami terbuka untuk kontribusi! Silakan buat Pull Request atau buka Issue jika menemukan bug.  
-
----
-
-## 📜 Lisensi
-
-Proyek ini dirilis di bawah lisensi MIT.
