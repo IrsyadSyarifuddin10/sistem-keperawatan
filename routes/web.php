@@ -4,6 +4,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MentoringController;
 use App\Http\Controllers\InputMentoringController;
+use App\Http\Controllers\EditMentoringController;
+use App\Http\Controllers\InputSupervisiController;
+use App\Http\Controllers\EditSupervisiController;
 use App\Http\Controllers\SupervisiController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/redirect-logbook', [LogbookController::class, 'redirect'])->name('redirect-logbook');
     Route::post('/input-mentoring', [InputMentoringController::class, 'store'])->name('input-mentoring');
+    Route::post('/edit-mentoring', [EditMentoringController::class, 'store'])->name('edit-mentoring');
     Route::post('/input-supervisi', [SupervisiController::class, 'store'])->name('input-supervisi');
     Route::get('/get-user-name', [UserController::class, 'getUserName']);
     Route::get('/mentoring', [MentoringController::class, 'index'])->name('mentoring');

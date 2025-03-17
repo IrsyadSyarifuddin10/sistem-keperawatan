@@ -59,10 +59,10 @@
                                 <td class="px-4 py-3">{{ $mentoringIndex->status_verifikasi }}</td>
                                 <td class="px-4 py-3 text-right flex flex-row justify-end gap-2">
                                     <!-- Form untuk Edit -->
-                                    <form action="{{ route('input-mentoring') }}" method="GET">
-                                        <input type="hidden" name="nip" value="{{ $mentoringIndex->created_at }}">
+                                    <form action="{{ route('edit-mentoring') }}" method="POST">
+                                        <input type="hidden" name="created_at" value="{{ $mentoringIndex->created_at }}">
                                         <input type="hidden" name="nip" value="{{ $mentoringIndex->nip }}">
-                                        <input type="hidden" name="nip" value="{{ $mentoringIndex->nipMentor }}">
+                                        <input type="hidden" name="nip-mentor" value="{{ $mentoringIndex->nipMentor }}">
                                         <button id="btnUbahMentoring" type="submit"
                                             class="px-3 py-2 focus:outline-none text-black border border-gray-300 hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm dark:focus:ring-black">
                                             <i class="bi bi-pencil-fill"></i>
