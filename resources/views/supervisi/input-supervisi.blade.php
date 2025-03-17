@@ -188,7 +188,7 @@ $v_supervisi_formatted = array_map(function ($item) {
                         </div>
                         <table id="tbSupervisi" class="items-center bg-transparent w-full">
                             <thead
-                                class="text-gray-100 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100 text-xs">
+                                class="text-gray-100 uppercase bg-gray-700 dark:bg-gray-700 dark:text-gray-100 text-xs">
                                 <tr>
                                     <th
                                         class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 px-6 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left w-[1300px]">
