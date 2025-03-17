@@ -22,7 +22,7 @@ class SupervisiController extends Controller
         $indexSupervisi = DB::table('supervisi')
             ->leftJoin('users as nipUsers', 'supervisi.nip', '=', 'nipUsers.nip')
             ->leftJoin('users as supervisorUsers', 'supervisi.supervisor', '=', 'supervisorUsers.nip')
-            ->select(['supervisi.created_at', 'nipUsers.name as nip', 'supervisorUsers.name as supervisor', 'supervisi.status_verifikasi'])
+            ->select(['supervisi.created_at', 'nipUsers.nip as nip', 'nipUsers.name as name', 'supervisorUsers.nip as nipSupervisor', 'supervisorUsers.name as supervisor', 'supervisi.status_verifikasi'])
             ->get();
 
         return view('supervisi.supervisi', compact('indexSupervisi')); // Kirim data ke view

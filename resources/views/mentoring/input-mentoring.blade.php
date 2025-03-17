@@ -47,9 +47,9 @@ $v_mentoring_formatted = array_map(function ($item) {
         });
     </script>
     <form action="{{ route('input-mentoring') }}" method="POST">
-        <div class="py-12 px-[250px]">
-            <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 sm:px-2 lg:px-4">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6 ">
+        <div class="py-12">
+            <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 lg:px-4">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6  ">
                     <div class="p-3 text-gray-900 block w-full overflow-x-auto">
                         <div class="p-3 text-2xl font-black">
                             Input Mentoring
@@ -74,7 +74,7 @@ $v_mentoring_formatted = array_map(function ($item) {
                         </div>
                         <table id="tbSupervisi" class="items-center bg-transparent w-full">
                             <thead
-                                class="text-gray-100 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100 text-xs">
+                                class="text-gray-100 uppercase bg-gray-700 dark:bg-gray-700 dark:text-gray-100 text-xs">
                                 <tr>
                                     <th
                                         class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 px-6 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left w-[1300px]">
@@ -117,7 +117,8 @@ $v_mentoring_formatted = array_map(function ($item) {
                         </table>
                         <div class="flex flex-row pt-4 px-6">
                             <x-input-label for="catatan_mentoring" :value="__('Catatan')" />
-                            <textarea name="catatan_mentoring" class="form-control mx-2 w-full" rows="3"></textarea>
+                            <textarea name="catatan_mentoring" class="form-control mx-2 w-full"
+                                rows="3">{{ $mentoringData['catatan'] ?? '' }}</textarea>
                         </div>
                         @if(in_array(auth()->user()->role, ['admin', 'bk']))
                             <div class="flex flex-row pt-4 px-6 justify-end">
@@ -142,11 +143,11 @@ $v_mentoring_formatted = array_map(function ($item) {
                         @endif
                         <div class="flex flex-row pt-10 justify-end">
                             <a href="{{ route('mentoring') }}"
-                                class="float-right w-20 mx-2 pl-6 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 hover:bg-orange-800 focus:ring-4 focus:ring-purple-300 rounded-lg text-sm dark:bg-amber-400 dark:hover:bg-amber-600 dark:focus:ring-purple-900">
+                                class="float-right w-20 mx-2 pl-6 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-amber-400 hover:bg-amber-600 focus:ring-purple-900 rounded-lg text-sm dark:bg-amber-400 dark:hover:bg-amber-600 dark:focus:ring-purple-900">
                                 {{ __('Batal') }}
                             </a>
                             <x-primary-button
-                                class="float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 hover:bg-orange-800 focus:ring-4 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                                class="float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                                 {{ __('Simpan') }}
                             </x-primary-button>
                         </div>
