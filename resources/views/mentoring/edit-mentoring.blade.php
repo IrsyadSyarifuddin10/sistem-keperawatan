@@ -46,17 +46,17 @@ $v_mentoring_formatted = array_map(function ($item) {
             });
         });
     </script>
-    <form action="{{ route('input-mentoring') }}" method="POST">
+    <form action="{{ route('edit-mentoring') }}" method="POST">
         <div class="py-12">
             <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 lg:px-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6  ">
                     <div class="p-3 text-gray-900 block w-full overflow-x-auto">
                         <div class="p-3 text-2xl font-black">
-                            Input Mentoring
+                            Edit Mentoring
                         </div>
                         <div class="p-3 flex flex-row">
                             <div class="mt-4 flex-1 mx-2">
-                                <x-input-label for="nip_confirmation" :value="__('Masukkan NIP lalu enter')" />
+                                <x-input-label for="nip_confirmation" :value="__('Pastikan NIP sudah benar')" />
 
                                 <x-text-input id="nip_confirmation" class="block mt-1 w-full" type="text"
                                     name="nip_confirmation" />
@@ -64,7 +64,7 @@ $v_mentoring_formatted = array_map(function ($item) {
                                 <x-input-error :messages="$errors->get('nip_confirmation')" class="mt-2" />
                             </div>
                             <div class="mt-4 flex-1 mx-2">
-                                <x-input-label for="name_confirmation" :value="__('Pastikan nama yang otomatis muncul')" />
+                                <x-input-label for="name_confirmation" :value="__('Pastikan nama sudah benar')" />
 
                                 <x-text-input id="name_confirmation" class="block mt-1 w-full" type="text"
                                     disabled="true" name="name_confirmation" />
@@ -127,7 +127,7 @@ $v_mentoring_formatted = array_map(function ($item) {
                             </a>
                             <x-primary-button
                                 class="float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-                                {{ __('Simpan') }}
+                                {{ __('Ubah') }}
                             </x-primary-button>
                         </div>
                     </div>
