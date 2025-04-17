@@ -6,7 +6,7 @@
     </x-slot>
     <?php
 $f_mentoring = ['visi_misi_motto_dan_nilai_nilai_dasar_rsia_puti_bungsu', 'struktur_organisasi_rsia_puti_bungsu', 'dokter_umum_dan_dokter_spesialis_rsia_puti_bungsu', 'pelayanan_unggulan_rsia_puti_bungsu', 'alur_perizinan_rsia_puti_bungsu', 'peraturan_rsia_puti_bungsu', 'disiplin_dan_tata_tertib_kerja_rsia_puti_bungsu', 'budaya_5s', 'komunikasi_interpersonal_dalam_melaksanakan_tindakan_keperawatan', 'prinsip_etika_dan_etiket_keperawatan', 'menerapkan_prinsip_prinsip_pencegahan_infeksi_nosocomial', 'melakukan_ttv', 'insiden_keselamatan_pasien', 'pasien_safety', 'assasmen_resiko_jatuh', 'transportasi_pasien', 'memberikan_obat_dengan_cara_aman_dan_tepat', 'memfasilitasi_pemenuhan_kebutuhan_cairan_dan_elektrolit', 'mengelola_pemberian_darah_dan_produk_darah', 'memfasilitasi_pemenuhan_kebutuhan_oksigen', 'melakukan_perawatan_luka', 'analisa_interpretasi_data_dan_dokumen_secara_akurat', 'pembinaan_staf_keperawatan', 'caring'];
-$v_mentoring = ['visi_misi_motto_dan_nilai_nilai_dasar_rsia_puti_bungsu', 'struktur_organisasi_rsia_puti_bungsu', 'dokter_umum_dan_dokter_spesialis_rsia_puti_bungsu', 'pelayanan_unggulan_rsia_puti_bungsu', 'alur_perizinan_rsia_puti_bungsu', 'peraturan_rsia_puti_bungsu', 'disiplin_dan_tata_tertib_kerja_rsia_puti_bungsu', 'budaya_5s', 'komunikasi_interpersonal_dalam_melaksanakan_tindakan_keperawatan', 'prinsip_etika_dan_etiket_keperawatan', 'menerapkan_prinsip_prinsip_pencegahan_infeksi_nosocomial', 'melakukan_ttv', 'insiden_keselamatan_pasien', 'pasien_safety', 'assasmen_resiko_jatuh', 'transportasi_pasien', 'memberikan_obat_dengan_cara_aman_dan_tepat', 'memfasilitasi_pemenuhan_kebutuhan_cairan_dan_elektrolit', 'mengelola_pemberian_darah_dan_produk_darah', 'memfasilitasi_pemenuhan_kebutuhan_oksigen', 'melakukan_perawatan_luka', 'analisa_interpretasi_data_dan_dokumen_secara_akurat', 'pembinaan_staf_keperawatan', 'caring'];
+$v_mentoring = ['visi_misi_motto_dan_nilai_nilai_dasar_rsia_puti_bungsu', 'struktur_organisasi_rsia_puti_bungsu', 'dokter_umum_dan_dokter_spesialis_rsia_puti_bungsu', 'pelayanan_unggulan_rsia_puti_bungsu', 'alur_perizinan_rsia_puti_bungsu', 'peraturan_rsia_puti_bungsu', 'disiplin_dan_tata_tertib_kerja_rsia_puti_bungsu', 'budaya_5S', 'komunikasi_interpersonal_dalam_melaksanakan_tindakan_keperawatan', 'prinsip_etika_dan_etiket_keperawatan', 'menerapkan_prinsip_prinsip_pencegahan_infeksi_nosocomial', 'melakukan_TTV', 'insiden_keselamatan_pasien', 'pasien_safety', 'assasmen_resiko_jatuh', 'transportasi_pasien', 'memberikan_obat_dengan_cara_aman_dan_tepat', 'memfasilitasi_pemenuhan_kebutuhan_cairan_dan_elektrolit', 'mengelola_pemberian_darah_dan_produk_darah', 'memfasilitasi_pemenuhan_kebutuhan_oksigen', 'melakukan_perawatan_luka', 'analisa_interpretasi_data_dan_dokumen_secara_akurat', 'pembinaan_staf_keperawatan', 'caring'];
 
 $v_mentoring_formatted = array_map(function ($item) {
     return ucwords(str_replace('_', ' ', $item));
@@ -46,7 +46,7 @@ $v_mentoring_formatted = array_map(function ($item) {
             });
         });
     </script>
-    <form action="{{ route('edit-mentoring') }}" method="POST">
+    <form action="{{ route('edit-data-mentoring') }}" method="POST">
         <div class="py-12">
             <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 lg:px-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6  ">
@@ -59,7 +59,7 @@ $v_mentoring_formatted = array_map(function ($item) {
                                 <x-input-label for="nip_confirmation" :value="__('Pastikan NIP sudah benar')" />
 
                                 <x-text-input id="nip_confirmation" class="block mt-1 w-full" type="text"
-                                    name="nip_confirmation" />
+                                    value="{{ $indexEditMentoring->nip }}" name="nip_confirmation" />
 
                                 <x-input-error :messages="$errors->get('nip_confirmation')" class="mt-2" />
                             </div>
@@ -67,7 +67,7 @@ $v_mentoring_formatted = array_map(function ($item) {
                                 <x-input-label for="name_confirmation" :value="__('Pastikan nama sudah benar')" />
 
                                 <x-text-input id="name_confirmation" class="block mt-1 w-full" type="text"
-                                    disabled="true" name="name_confirmation" />
+                                    value="{{ $indexEditMentoring->name }}" disabled="true" name="name_confirmation" />
 
                                 <x-input-error :messages="$errors->get('name_confirmation')" class="mt-2" />
                             </div>
@@ -89,12 +89,16 @@ $v_mentoring_formatted = array_map(function ($item) {
                             <tbody>
                                 @csrf
                                 <?php foreach ($v_mentoring_formatted as $index => $item): ?>
-                                <?php    $fitem = $f_mentoring[$index] ?? null; ?>
+                                <?php    
+                                    $fitem = $f_mentoring[$index] ?? null; 
+                                    $dataIndexEditMentoring = $indexEditMentoring->$fitem;
+                                ?>
                                 <tr>
                                     <!-- Kolom Pertama: Nama Supervisi -->
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-normal p-4 text-left text-blueGray-700">
-                                        *<?= htmlspecialchars($item) ?>
+                                        *
+                                        <?= htmlspecialchars($item) ?>
                                     </td>
                                     <!-- Kolom Kedua: Toggle Button -->
                                     <td class="text-right px-6">
@@ -104,7 +108,9 @@ $v_mentoring_formatted = array_map(function ($item) {
 
                                             <!-- Checkbox: jika dicentang, nilainya "tercapai" -->
                                             <input type="checkbox" value="tercapai" name="{{ $fitem }}"
-                                                id="{{ $fitem }}" class="sr-only peer">
+                                                id="{{ $fitem }}" class="sr-only peer"
+                                                <?=($dataIndexEditMentoring==='tercapai' ) ? 'checked' : '' ?>
+                                            >
 
                                             <div
                                                 class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
@@ -115,10 +121,11 @@ $v_mentoring_formatted = array_map(function ($item) {
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+
                         <div class="flex flex-row pt-4 px-6">
                             <x-input-label for="catatan_mentoring" :value="__('Catatan')" />
                             <textarea name="catatan_mentoring" class="form-control mx-2 w-full"
-                                rows="3">{{ $mentoringData['catatan'] ?? '' }}</textarea>
+                                rows="3">{{ $indexEditMentoring->catatan ?? '' }}</textarea>
                         </div>
                         <div class="flex flex-row pt-10 justify-end">
                             <a href="{{ route('mentoring') }}"

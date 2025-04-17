@@ -66,7 +66,7 @@ $f_supervisi = [
 $v_supervisi = [
     'menerima_dan_mengerjakan_dokumentasi_pasien_baru',
     'memberikan_oksigen',
-    'melakukan_sbar_dan_tbak',
+    'melakukan_SBAR_dan_TBAK',
     'assesment_resiko_jatuh',
     'asesment_nyeri',
     'mengukur_pernafasan',
@@ -78,9 +78,9 @@ $v_supervisi = [
     'melakukan_asuhan_kebidanan',
     'membantu_proses_persalinan_normal',
     'melakukan_kebersihan_vulva',
-    'melakukan_observasi_kemajuan_persalinan_kala_i_ii_iii_iv',
-    'melakukan_vt',
-    'melakukan_observasi_djj',
+    'melakukan_observasi_kemajuan_persalinan_kala_I_II_III_IV',
+    'melakukan_VT',
+    'melakukan_observasi_DJJ',
     'melakukan_epistomi',
     'melakukan_hecting_perineum',
     'resusitasi_bayi_baru_lahir_spontan',
@@ -88,9 +88,9 @@ $v_supervisi = [
     'memasang_infus_dewasa',
     'melakukan_gym_ball',
     'melakukan_pijat_oksitosin',
-    'mengoperasionalkan_ctg',
-    'mengoperasionalkan_ekg',
-    'mengoperasionalkan_usg',
+    'mengoperasionalkan_CTG',
+    'mengoperasionalkan_EKG',
+    'mengoperasionalkan_USG',
     'melakukan_dan_mendokumentasikan_7_benar_obat',
     'memberikan_obat_per_oral',
     'memberikan_obat_intra_venous',
@@ -117,7 +117,7 @@ $v_supervisi = [
     'memandikan_pasien',
     'memandikan_bayi',
     'menghitung_tetesan_infus',
-    'mengoperasionalkan_cpap',
+    'mengoperasionalkan_CPAP',
     'mengoperasionalkan_ventilator',
 ];
 
@@ -160,8 +160,8 @@ $v_supervisi_formatted = array_map(function ($item) {
         });
     </script>
 
-    <form action="{{ route('input-data-supervisi') }}" method="POST">
-        <div class="py-12 px-[250px]">
+    <form action="{{ route('edit-data-supervisi') }}" method="POST">
+        <div class="py-12 px-6">
             <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 sm:px-2 lg:px-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6 ">
                     <div class="p-3 text-gray-900 block w-full overflow-x-auto">
@@ -170,18 +170,18 @@ $v_supervisi_formatted = array_map(function ($item) {
                         </div>
                         <div class="p-3 flex flex-row">
                             <div class="mt-4 flex-1 mx-2">
-                                <x-input-label for="nip_confirmation" :value="__('Masukkan NIP lalu enter')" />
+                                <x-input-label for="nip_confirmation" :value="__('Pastikan NIP sudah benar')" />
 
                                 <x-text-input id="nip_confirmation" class="block mt-1 w-full" type="text"
-                                    name="nip_confirmation" />
+                                    value="{{ $indexEditSupervisi->nip }}" name="nip_confirmation" />
 
                                 <x-input-error :messages="$errors->get('nip_confirmation')" class="mt-2" />
                             </div>
                             <div class="mt-4 flex-1 mx-2">
-                                <x-input-label for="name_confirmation" :value="__('Pastikan nama yang otomatis muncul')" />
+                                <x-input-label for="name_confirmation" :value="__('Pastikan nama sudah benar')" />
 
                                 <x-text-input id="name_confirmation" class="block mt-1 w-full" type="text"
-                                    disabled="true" name="name_confirmation" />
+                                    value="{{ $indexEditSupervisi->name }}" disabled="true" name="name_confirmation" />
 
                                 <x-input-error :messages="$errors->get('name_confirmation')" class="mt-2" />
                             </div>
@@ -201,14 +201,17 @@ $v_supervisi_formatted = array_map(function ($item) {
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @csrf
                                 <?php foreach ($v_supervisi_formatted as $index => $item): ?>
-                                <?php    $fitem = $f_supervisi[$index] ?? null; ?>
+                                <?php
+                                    $fitem = $f_supervisi[$index] ?? null; 
+                                    $dataIndexEditSupervisi = $indexEditSupervisi->$fitem;
+                                ?>
                                 <tr>
                                     <!-- Kolom Pertama: Nama Supervisi -->
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-normal p-4 text-left text-blueGray-700">
+                                        *
                                         <?= htmlspecialchars($item) ?>
                                     </td>
                                     <!-- Kolom Kedua: Toggle Button -->
@@ -218,8 +221,10 @@ $v_supervisi_formatted = array_map(function ($item) {
                                             <input type="hidden" name="{{ $fitem }}" value="belum">
 
                                             <!-- Checkbox: jika dicentang, nilainya "tercapai" -->
-                                            <input type="checkbox" value="sudah" name="{{ $fitem }}"
-                                                id="{{ $fitem }}" class="sr-only peer">
+                                            <input type="checkbox" value="sudah" name="{{ $fitem }}" id="{{ $fitem }}"
+                                                class="sr-only peer" <?=($dataIndexEditSupervisi==='sudah' ) ? 'checked'
+                                                : '' ?>
+                                            >
 
                                             <div
                                                 class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
@@ -232,29 +237,9 @@ $v_supervisi_formatted = array_map(function ($item) {
                         </table>
                         <div class="flex flex-row pt-4 px-6">
                             <x-input-label for="catatan_supervisi" :value="__('Catatan')" />
-                            <textarea name="catatan_supervisi" class="form-control mx-2 w-full" rows="3"></textarea>
+                            <textarea name="catatan_supervisi" class="form-control mx-2 w-full"
+                                rows="3">{{ $indexEditSupervisi->catatan ?? '' }}</textarea>
                         </div>
-                        @if(in_array(auth()->user()->role, ['admin', 'bk']))
-                            <div class="flex flex-row pt-4 px-6 justify-end">
-                                <div class="align-middletext-sm whitespace-normal p-4 text-left text-blueGray-700">
-                                    Verifikasi?
-                                </div>
-                                <td>
-                                    <label class="inline-flex items-center cursor-pointer">
-                                        <!-- Hidden input untuk nilai default "tidak tercapai" -->
-                                        <input type="hidden" name="status_verifikasi" value="tidak tercapai">
-
-                                        <!-- Checkbox: jika dicentang, nilainya "tercapai" -->
-                                        <input type="checkbox" value="tercapai" name="status_verifikasi" id="status_verifikasi"
-                                            class="sr-only peer">
-
-                                        <div
-                                            class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
-                                        </div>
-                                    </label>
-                                </td>
-                            </div>
-                        @endif
                         <div class="flex flex-row pt-10 justify-end">
                             <a href="{{ route('supervisi') }}"
                                 class="float-right w-20 mx-2 pl-6 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 hover:bg-orange-800 focus:ring-4 focus:ring-purple-300 rounded-lg text-sm dark:bg-amber-400 dark:hover:bg-amber-600 dark:focus:ring-purple-900">
@@ -262,7 +247,7 @@ $v_supervisi_formatted = array_map(function ($item) {
                             </a>
                             <x-primary-button
                                 class="float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 hover:bg-orange-800 focus:ring-4 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-                                {{ __('Simpan') }}
+                                {{ __('Ubah') }}
                             </x-primary-button>
                         </div>
 

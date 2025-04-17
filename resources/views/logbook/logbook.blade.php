@@ -46,52 +46,23 @@
                                 Nama Pasien <span class="sort-icon cursor-pointer sort-header"><i
                                         class="bi bi-chevron-expand"></i></span>
                             </th>
+                            <th scope="col" class="px-4 py-3" onclick="sortTable(2, this)">
+                                Nama Petugas <span class="sort-icon cursor-pointer sort-header"><i
+                                        class="bi bi-chevron-expand"></i></span>
+                            </th>
                             <th scope="col" class="px-4 py-3" onclick="sortTable(3, this)">
-                                Status Verifikasi <span class="sort-icon cursor-pointer sort-header"><i
+                                Status Validasi <span class="sort-icon cursor-pointer sort-header"><i
+                                        class="bi bi-chevron-expand"></i></span>
+                            </th>
+                            <th scope="col" class="px-4 py-3" onclick="sortTable(3, this)">
+                                Waktu Validasi <span class="sort-icon cursor-pointer sort-header"><i
                                         class="bi bi-chevron-expand"></i></span>
                             </th>
                             <th scope="col" class="px-4 py-3"></th> <!-- For actions -->
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($indexLogbook as $logbookIndex)
-                        <tr class="border-b dark:border-gray-700 text-black">
-                            <td class="px-4 py-3">
-                                {{ \Carbon\Carbon::parse($logbookIndex->created_at)->format('d-m-Y H:i') }}
-                            </td>
-                            <td class="px-4 py-3">{{ $logbookIndex->nip }}</td>
-                            <td class="px-4 py-3">{{ $logbookIndex->mentor }}</td>
-                            <td class="px-4 py-3">{{ $logbookIndex->status_verifikasi }}</td>
-                            <td class="px-4 py-3 text-right">
-                                @if(in_array(auth()->user()->role, ['admin', 'bk']))
-                                <form action="{{ route('input-mentoring') }}">
-                                    <div class="relative inline-block group">
-                                        <!-- Tombol Validasi (Hanya untuk Role A) -->
-                                        <button id="btnValidasiMentoring" type="button"
-                                            class="float-right mx-0.5 my-0.5 px-4 py-3 focus:outline-none text-black border-x-orange-900 hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm dark:focus:ring-black">
-                                            <i class="bi bi-file-earmark-check-fill"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                                @endif
-                                <div class="relative inline-block group">
-                                    <!-- Tombol -->
-                                    <button id="btnUbahMentoring" type="button"
-                                        class="float-right mx-0.5 my-0.5 px-4 py-3 focus:outline-none text-black border-x-orange-900 hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm dark:focus:ring-black">
-                                        <i class="bi bi-pencil-fill"></i>
-                                    </button>
-                                </div>
-                                <div class="inline-block">
-                                    <!-- Tombol -->
-                                    <button id="btnHapusMentoring" type="button"
-                                        class="float-right mx-0.5 my-0.5 px-4 py-3 focus:outline-none text-black border-x-orange-900 hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm dark:focus:ring-black">
-                                        <i class="bi bi-trash3-fill"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach --}}
-                        <!-- Repeat similar structure for other rows -->
+
                     </tbody>
                 </table>
             </div>

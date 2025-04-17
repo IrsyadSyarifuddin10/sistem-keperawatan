@@ -1,8 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Supervisi') }}
-        </h2>
+        <h2 class="text-xl leading-tight font-semibold text-gray-800">{{ __('Supervisi') }}</h2>
     </x-slot>
 
     <div class="py-12 px-6">
@@ -10,9 +8,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6 ">
                 <div class="text-gray-900 block w-full overflow-x-auto">
                     <div class="flex flex-row w-full py-2 justify-between">
-                        <div class="font-semibold text-4xl text-gray-800 leading-tight">
-                            Data Supervisi
-                        </div>
+                        <div class="font-semibold text-4xl text-gray-800 leading-tight">Data Supervisi</div>
                         <div class="flex items-center">
                             <label for="first_name"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 mr-2 pt-2">Cari</label>
@@ -22,13 +18,10 @@
                         </div>
                     </div>
                 </div>
-                <form action="{{ route('input-supervisi') }}">
-                    <button id="btnInputSupervisi" type="button"
-                        class="float-right mx-8 px-4 py-3 my-0.5 focus:outline-none text-white bg-purple-600 hover:bg-purple-700 focus:ring-purple-900 font-black border-x-orange-900 hover:bg-orange-800 focus:ring-4 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-                        :href="route('input-supervisi')"
-                        onclick="event.preventDefault(); this.closest('form').submit();">
-                        <i class="bi bi-plus-circle"></i> Tambah
-                    </button>
+                <form action="{{ route('input-supervisi') }}" method="GET">
+                    <button id="btnInputSupervisi" type="submit"
+                        class="float-right mx-8 my-0.5 rounded-lg border-x-orange-900 bg-purple-600 px-4 py-3 text-sm font-black text-white hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:bg-purple-600 dark:text-white dark:hover:bg-purple-700 dark:focus:ring-purple-900"><i
+                            class="bi bi-plus-circle"></i> Tambah</button>
                 </form>
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-100 uppercase bg-gray-700 dark:bg-gray-700 dark:text-gray-100">
@@ -54,35 +47,51 @@
                     </thead>
                     <tbody>
                         @foreach ($indexSupervisi as $supervisiIndex)
-                            <tr class="border-b dark:border-gray-700 text-black">
-                                <td class="px-4 py-3">
-                                    {{ \Carbon\Carbon::parse(time: $supervisiIndex->created_at)->format('d-m-Y H:i') }}
-                                </td>
-                                <td class="px-4 py-3">{{ $supervisiIndex->name }}</td>
-                                <td class="px-4 py-3">{{ $supervisiIndex->supervisor }}</td>
-                                <td class="px-4 py-3">{{ $supervisiIndex->status_verifikasi }}</td>
-                                <td class="px-4 py-3 text-right flex flex-row justify-end gap-2">
-                                    <!-- Form untuk Edit -->
-                                    <form action="{{ route('input-supervisi') }}" method="GET">
-                                        <input type="hidden" name="nip" value="{{ $supervisiIndex->nip }}">
-                                        <button id="btnUbahSupervisi" type="submit"
-                                            class="px-3 py-2 focus:outline-none text-black border border-gray-300 hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm dark:focus:ring-black">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </button>
-                                    </form>
+                        <tr class="border-b dark:border-gray-700 text-black">
+                            <td class="px-4 py-3">
+                                {{ \Carbon\Carbon::parse(time: $supervisiIndex->created_at)->format('d-m-Y H:i') }}
+                            </td>
+                            <td class="px-4 py-3">{{ $supervisiIndex->name }}</td>
+                            <td class="px-4 py-3">{{ $supervisiIndex->supervisor }}</td>
+                            <td class="px-4 py-3">{{ $supervisiIndex->status_verifikasi }}</td>
+                            <td class="px-4 py-3 text-right flex flex-row justify-end gap-2">
+                                <!-- Form untuk Edit -->
+                                <form
+                                    action="{{ route('edit-supervisi', ['created_at' => $supervisiIndex->created_at,'nip'=>$supervisiIndex->nip,'nipSupervisor'=>$supervisiIndex->nipSupervisor ]) }}"
+                                    method="GET">
+                                    @csrf
+                                    <input type="hidden" name="created_at" value="{{ $supervisiIndex->created_at }}" />
+                                    <input type="hidden" name="nip" value="{{ $supervisiIndex->nip }}" />
+                                    <input type="hidden" name="nip-supervisor"
+                                        value="{{ $supervisiIndex->nipSupervisor }}" />
+                                    <button id="btnUbahSupervisi" type="submit"
+                                        class="mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </button>
+                                </form>
 
-                                    <!-- Tombol Hapus -->
-                                    <form action="" method="GET">
-                                        <button id="btnHapusSupervisi" type="button"
-                                            class="px-3 py-2 focus:outline-none text-black border border-gray-300 hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm dark:focus:ring-black">
-                                            <i class="bi bi-trash3-fill"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <!-- Tombol Hapus -->
+                                <form action="{{ route('delete-data-supervisi', [
+                                'created_at' => $supervisiIndex->created_at,
+                                'nip' => $supervisiIndex->nip,
+                                'nipSupervisor' => $supervisiIndex->nipSupervisor
+                            ]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        class="btnHapusMentoring mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <!-- Pagination -->
+                <div class="mt-4">
+                    {{ $indexSupervisi->links() }}
+                </div>
             </div>
         </div>
     </div>

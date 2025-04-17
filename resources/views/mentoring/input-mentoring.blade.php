@@ -46,7 +46,7 @@ $v_mentoring_formatted = array_map(function ($item) {
             });
         });
     </script>
-    <form action="{{ route('input-mentoring') }}" method="POST">
+    <form action="{{ route('input-data-mentoring') }}" method="POST">
         <div class="py-12">
             <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 lg:px-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6  ">
@@ -64,7 +64,8 @@ $v_mentoring_formatted = array_map(function ($item) {
                                 <x-input-error :messages="$errors->get('nip_confirmation')" class="mt-2" />
                             </div>
                             <div class="mt-4 flex-1 mx-2">
-                                <x-input-label for="name_confirmation" :value="__('Pastikan nama yang otomatis muncul')" />
+                                <x-input-label for="name_confirmation"
+                                    :value="__('Pastikan nama yang otomatis muncul')" />
 
                                 <x-text-input id="name_confirmation" class="block mt-1 w-full" type="text"
                                     disabled="true" name="name_confirmation" />
@@ -94,7 +95,8 @@ $v_mentoring_formatted = array_map(function ($item) {
                                     <!-- Kolom Pertama: Nama Supervisi -->
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-normal p-4 text-left text-blueGray-700">
-                                        *<?= htmlspecialchars($item) ?>
+                                        *
+                                        <?= htmlspecialchars($item) ?>
                                     </td>
                                     <!-- Kolom Kedua: Toggle Button -->
                                     <td class="text-right px-6">
@@ -125,7 +127,7 @@ $v_mentoring_formatted = array_map(function ($item) {
                                 class="float-right w-20 mx-2 pl-6 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-amber-400 hover:bg-amber-600 focus:ring-purple-900 rounded-lg text-sm dark:bg-amber-400 dark:hover:bg-amber-600 dark:focus:ring-purple-900">
                                 {{ __('Batal') }}
                             </a>
-                            <x-primary-button
+                            <x-primary-button id="openModal"
                                 class="float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                                 {{ __('Simpan') }}
                             </x-primary-button>
