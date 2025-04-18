@@ -12,68 +12,73 @@ class LogbookController extends Controller
     public function index($type)
     {
         $user = Auth::user();
+        $indexLogbook = collect(); // Default: kosong biar gak error di view
 
-        // Contoh percabangan berdasarkan role/user_id
-        if ($user->role === 'admin') {
-            //admin
-        } elseif ($user->role === 'bk') {
-            $indexLogbookBK = DB::table('logbook_bk')
-                ->leftJoin('users', 'logbook_bk.validator', '=', 'users.nip')
-                ->leftJoin('pasien', 'logbook_bk.no_rm', '=', 'pasien.no_rm')
-                ->select(['logbook_bk.created_at', 'logbook_bk.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_bk.status_validasi', 'logbook_bk.waktu_validasi'])
-                ->get();
+        switch ($user->role) {
+            case 'bk':
+                $indexLogbook = DB::table('logbook_bk')
+                    ->leftJoin('users', 'logbook_bk.validator', '=', 'users.nip')
+                    ->leftJoin('pasien', 'logbook_bk.no_rm', '=', 'pasien.no_rm')
+                    ->select(['logbook_bk.created_at', 'logbook_bk.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_bk.status_validasi', 'logbook_bk.waktu_validasi'])
+                    ->get();
+                break;
 
-            return view('logbook.logbook_bk', compact('indexLogbookBK')); // Kirim data ke view
-        } elseif ($user->role === 'pk-ugd') {
-            $indexLogbookPKUGD = DB::table('logbook_pk_ugd')
-                ->leftJoin('users', 'logbook_pk_ugd.validator', '=', 'users.nip')
-                ->leftJoin('pasien', 'logbook_pk_ugd.no_rm', '=', 'pasien.no_rm')
-                ->select(['logbook_pk_ugd.created_at', 'logbook_pk_ugd.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_ugd.status_validasi', 'logbook_pk_ugd.waktu_validasi'])
-                ->get();
+            case 'pk-ugd':
+                $indexLogbook = DB::table('logbook_pk_ugd')
+                    ->leftJoin('users', 'logbook_pk_ugd.validator', '=', 'users.nip')
+                    ->leftJoin('pasien', 'logbook_pk_ugd.no_rm', '=', 'pasien.no_rm')
+                    ->select(['logbook_pk_ugd.created_at', 'logbook_pk_ugd.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_ugd.status_validasi', 'logbook_pk_ugd.waktu_validasi'])
+                    ->get();
+                break;
 
-            return view('logbook.logbook_pk_ugd', compact('indexLogbookPKUGD')); // Kirim data ke view
-        } elseif ($user->role === 'pk-rawat-jalan') {
-            $indexLogbookPKRawatJalan = DB::table('logbook_pk_rawat_jalan')
-                ->leftJoin('users', 'logbook_pk_rawat_jalan.validator', '=', 'users.nip')
-                ->leftJoin('pasien', 'logbook_pk_rawat_jalan.no_rm', '=', 'pasien.no_rm')
-                ->select(['logbook_pk_rawat_jalan.created_at', 'logbook_pk_rawat_jalan.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_rawat_jalan.status_validasi', 'logbook_pk_rawat_jalan.waktu_validasi'])
-                ->get();
+            case 'pk-rawat-jalan':
+                $indexLogbook = DB::table('logbook_pk_rawatjalan')
+                    ->leftJoin('users', 'logbook_pk_rawatjalan.validator', '=', 'users.nip')
+                    ->leftJoin('pasien', 'logbook_pk_rawatjalan.no_rm', '=', 'pasien.no_rm')
+                    ->select(['logbook_pk_rawatjalan.created_at', 'logbook_pk_rawatjalan.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_rawatjalan.status_validasi', 'logbook_pk_rawatjalan.waktu_validasi'])
+                    ->get();
+                break;
 
-            return view('logbook.logbook_pk_rawat_jalan', compact('indexLogbookPKRawatJalan')); // Kirim data ke view
-        } elseif ($user->role === 'pk-rawat-inap') {
-            $indexLogbookPKRawatInap = DB::table('logbook_pk_rawat_inap')
-                ->leftJoin('users', 'logbook_pk_rawat_inap.validator', '=', 'users.nip')
-                ->leftJoin('pasien', 'logbook_pk_rawat_inap.no_rm', '=', 'pasien.no_rm')
-                ->select(['logbook_pk_rawat_inap.created_at', 'logbook_pk_rawat_inap.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_rawat_jalan.status_validasi', 'logbook_pk_rawat_inap.waktu_validasi'])
-                ->get();
+            case 'pk-rawat-inap':
+                $indexLogbook = DB::table('logbook_pk_rawatinap')
+                    ->leftJoin('users', 'logbook_pk_rawatinap.validator', '=', 'users.nip')
+                    ->leftJoin('pasien', 'logbook_pk_rawatinap.no_rm', '=', 'pasien.no_rm')
+                    ->select(['logbook_pk_rawatinap.created_at', 'logbook_pk_rawatinap.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_rawatinap.status_validasi', 'logbook_pk_rawatinap.waktu_validasi'])
+                    ->get();
+                break;
 
-            return view('logbook.logbook_pk_rawat_inap', compact('indexLogbookPKRawatInap')); // Kirim data ke view
-        } elseif ($user->role === 'pk-perina') {
-            $indexLogbookPKPerina = DB::table('logbook_pk_ugd')
-                ->leftJoin('users', 'logbook_pk_perina.validator', '=', 'users.nip')
-                ->leftJoin('pasien', 'logbook_pk_perina.no_rm', '=', 'pasien.no_rm')
-                ->select(['logbook_pk_perina.created_at', 'logbook_pk_perina.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_perina.status_validasi', 'logbook_pk_perina.waktu_validasi'])
-                ->get();
+            case 'pk-perina':
+                $indexLogbook = DB::table('logbook_pk_perina') // <- perbaiki juga ini, tadi salah table
+                    ->leftJoin('users', 'logbook_pk_perina.validator', '=', 'users.nip')
+                    ->leftJoin('pasien', 'logbook_pk_perina.no_rm', '=', 'pasien.no_rm')
+                    ->select(['logbook_pk_perina.created_at', 'logbook_pk_perina.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_perina.status_validasi', 'logbook_pk_perina.waktu_validasi'])
+                    ->get();
+                break;
 
-            return view('logbook.logbook_pk_perina', compact('indexLogbookPKPerina')); // Kirim data ke view
-        } elseif ($user->role === 'pk-ok') {
-            $indexLogbookPKOK = DB::table('logbook_pk_ugd')
-                ->leftJoin('users', 'logbook_pk_ok.validator', '=', 'users.nip')
-                ->leftJoin('pasien', 'logbook_pk_ok.no_rm', '=', 'pasien.no_rm')
-                ->select(['logbook_pk_ok.created_at', 'logbook_pk_ok.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_ok.status_validasi', 'logbook_pk_ok.waktu_validasi'])
-                ->get();
+            case 'pk-ok':
+                $indexLogbook = DB::table('logbook_pk_ok') // <- tadi salah pakai `logbook_pk_ugd`
+                    ->leftJoin('users', 'logbook_pk_ok.validator', '=', 'users.nip')
+                    ->leftJoin('pasien', 'logbook_pk_ok.no_rm', '=', 'pasien.no_rm')
+                    ->select(['logbook_pk_ok.created_at', 'logbook_pk_ok.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_ok.status_validasi', 'logbook_pk_ok.waktu_validasi'])
+                    ->get();
+                break;
 
-            return view('logbook.logbook_pk_ok', compact('indexLogbookPKOK')); // Kirim data ke view
-        } elseif ($user->role === 'pk-icu') {
-            $indexLogbookPKICU = DB::table('logbook_pk_icu')
-                ->leftJoin('users', 'logbook_pk_icu.validator', '=', 'users.nip')
-                ->leftJoin('pasien', 'logbook_pk_icu.no_rm', '=', 'pasien.no_rm')
-                ->select(['logbook_pk_icu.created_at', 'logbook_pk_icu.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_icu.status_validasi', 'logbook_pk_icu.waktu_validasi'])
-                ->get();
+            case 'pk-icu':
+                $indexLogbook = DB::table('logbook_pk_icu')
+                    ->leftJoin('users', 'logbook_pk_icu.validator', '=', 'users.nip')
+                    ->leftJoin('pasien', 'logbook_pk_icu.no_rm', '=', 'pasien.no_rm')
+                    ->select(['logbook_pk_icu.created_at', 'logbook_pk_icu.no_rm', 'pasien.nama_pasien', 'users.name', 'logbook_pk_icu.status_validasi', 'logbook_pk_icu.waktu_validasi'])
+                    ->get();
+                break;
 
-            return view('logbook.logbook_pk_icu', compact('indexLogbookPKICU')); // Kirim data ke view
+            case 'admin':
+                // Bisa redirect, tampilkan dashboard, atau tampilkan semua data gabungan
+                break;
         }
+
+        return view('logbook.logbook', compact('indexLogbook'));
     }
+
     public function redirect(Request $request)
     {
         $user = Auth::user();

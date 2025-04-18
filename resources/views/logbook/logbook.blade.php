@@ -22,13 +22,10 @@
                         </div>
                     </div>
                 </div>
-                <form action="{{ route('redirect-logbook') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="float-right mx-8 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 
-                               hover:bg-orange-800 focus:ring-4 focus:ring-purple-300 rounded-lg text-sm 
-                               dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-                        <i class="bi bi-plus-circle"></i> Tambah
-                    </button>
+                <form action="{{ route('input-logbook') }}" method="GET">
+                    <button id="btnInputLogbook" type="submit"
+                        class="float-right mx-8 my-0.5 rounded-lg border-x-orange-900 bg-purple-600 px-4 py-3 text-sm font-black text-white hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:bg-purple-600 dark:text-white dark:hover:bg-purple-700 dark:focus:ring-purple-900"><i
+                            class="bi bi-plus-circle"></i> Tambah</button>
                 </form>
 
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -62,7 +59,45 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($indexLogbook as $logbookIndex)
+                        <tr class="border-b align-middle text-black dark:border-gray-700">
+                            <td class="px-4 py-3">
+                                {{ \Carbon\Carbon::parse($logbookIndex->created_at)->format('d-m-Y H:i') }}
+                            </td>
+                            <td class="px-4 py-3">{{ $logbookIndex->created_at }}</td>
+                            <td class="px-4 py-3">{{ $logbookIndex->no_rm }}</td>
+                            <td class="px-4 py-3">{{ $logbookIndex->nama_pasien }}</td>
+                            <td class="px-4 py-3">{{ $logbookIndex->name }}</td>
+                            <td class="px-4 py-3">{{ $logbookIndex->status_validasi }}</td>
+                            <td class="px-4 py-3">{{ $logbookIndex->waktu_validasi }}</td>
+                            <td class="flex flex-row justify-end gap-2 px-4 py-3 text-right">
+                                <!-- Form untuk Edit -->
+                                <form
+                                    action="{{ route('edit-logbook', ['created_at' => $logbookIndex->created_at,'no_rm'=>$logbookIndex->no_rm,'name'=>$logbookIndex->name ]) }}"
+                                    method="GET">
+                                    @csrf
+                                    <input type="hidden" name="created_at" value="{{ $logbookIndex->created_at }}" />
+                                    <input type="hidden" name="no_rm" value="{{ $logbookIndex->no_rm }}" />
+                                    <input type="hidden" name="name" value="{{ $logbookIndex->name }}" />
+                                    <button id="btnUbahLogbook" type="submit"
+                                        class="mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </button>
+                                </form>
 
+                                <!-- Tombol Hapus -->
+                                <form
+                                    action="{{ route('delete-data-logbook', ['created_at' => $logbookIndex->created_at,'no_rm' => $logbookIndex->no_rm,'name' => $logbookIndex->name,]) }}"
+                                    method="POST">
+                                    @csrf @method('DELETE')
+                                    <button
+                                        class="btnHapusLogbook mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
