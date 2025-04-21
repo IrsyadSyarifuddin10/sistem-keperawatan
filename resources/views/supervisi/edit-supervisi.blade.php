@@ -142,8 +142,8 @@ $v_supervisi_formatted = array_map(function ($item) {
                                 nip: nip
                             },
                             success: function(response) {
-                                if (response.name) {
-                                    $("#name_confirmation").val(response.name);
+                                if (response.nama_petugas) {
+                                    $("#name_confirmation").val(response.nama_petugas);
                                 } else {
                                     alert("NIP tidak ditemukan!");
                                     $("#name_confirmation").val(
@@ -181,7 +181,8 @@ $v_supervisi_formatted = array_map(function ($item) {
                                 <x-input-label for="name_confirmation" :value="__('Pastikan nama sudah benar')" />
 
                                 <x-text-input id="name_confirmation" class="block mt-1 w-full" type="text"
-                                    value="{{ $indexEditSupervisi->name }}" disabled="true" name="name_confirmation" />
+                                    value="{{ $indexEditSupervisi->nama_petugas }}" disabled="true"
+                                    name="name_confirmation" />
 
                                 <x-input-error :messages="$errors->get('name_confirmation')" class="mt-2" />
                             </div>

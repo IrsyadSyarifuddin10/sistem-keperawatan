@@ -19,7 +19,8 @@ class LogbookPKUGD extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'nip',
+        'id',
+        'no_rm',
         'serah_terima_dan_mengerjakan_dok_pasien_baru_dewasa_dan_anak',
         'memasang_gelang_identitas_pasien_sesuai_prosedur',
         'melakukan_pendokumentasian_assesment_pasien_awal_masuk',
@@ -53,9 +54,11 @@ class LogbookPKUGD extends Model
         'memberikan_perawatan_pada_pasien_yang_akan_meninggal',
         'memberikan_perawatan_pada_pasien_baru_meninggal',
         'catatan',
+        'nip',
+        'status_validasi',
         'validator',
         'created_at',
-        'updated_at',
+        'waktu_validasi',
     ];
 
     /**
@@ -67,7 +70,6 @@ class LogbookPKUGD extends Model
     {
         return [
             'created_at' => 'timestamp',
-            'updated_at' => 'timestamp'
         ];
     }
 }

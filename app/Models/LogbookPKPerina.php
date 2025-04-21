@@ -19,7 +19,8 @@ class LogbookPKPerina extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'nip',
+        'id',
+        'no_rm',
         'melakukan_resusitasi_bayi_baru_lahir',
         'memasang_gelang_pasien_baru',
         'menerima_dan_mengerjakan_dokumentasi_pasien_baru_neonatus',
@@ -45,9 +46,11 @@ class LogbookPKPerina extends Model
         'mengukur_saturasi_oksigen',
         'assesment_resiko_jatuh',
         'catatan',
+        'nip',
+        'status_validasi',
         'validator',
         'created_at',
-        'updated_at',
+        'waktu_validasi',
     ];
 
     /**
@@ -59,7 +62,6 @@ class LogbookPKPerina extends Model
     {
         return [
             'created_at' => 'timestamp',
-            'updated_at' => 'timestamp'
         ];
     }
 }

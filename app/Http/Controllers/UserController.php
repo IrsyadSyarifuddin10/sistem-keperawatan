@@ -13,9 +13,9 @@ class UserController extends Controller
         $user = User::where('nip', $nip)->first();
 
         if ($user) {
-            return response()->json(['name' => $user->name]);
+            return response()->json(['nama_petugas' => $user->nama_petugas]);
         } else {
-            return response()->json(['name' => null]);
+            return response()->json(['nama_petugas' => null]);
         }
     }
 }

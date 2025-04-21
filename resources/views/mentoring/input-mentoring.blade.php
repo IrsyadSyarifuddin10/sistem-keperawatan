@@ -29,8 +29,8 @@ $v_mentoring_formatted = array_map(function ($item) {
                                 nip: nip
                             },
                             success: function (response) {
-                                if (response.name) {
-                                    $("#name_confirmation").val(response.name);
+                                if (response.nama_petugas) {
+                                    $("#name_confirmation").val(response.nama_petugas);
                                 } else {
                                     alert("NIP tidak ditemukan!");
                                     $("#name_confirmation").val(

@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                     $username = strtolower($statuss . '-' . str_replace(' ', '-', $unit));
                     $users[] = [
                         'nip' => $iter,
-                        'name' => strtoupper($statuss) . ' - ' . $unit, // Nama lebih manusiawi
+                        'nama_petugas' => strtoupper($statuss) . ' - ' . $unit, // Nama lebih manusiawi
                         'email' => $username . '@sikep.com',
                         'password' => Hash::make('123'),
                         'status' => strtolower($statuss),
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
                 $username = strtolower($statuss);
                 $users[] = [
                     'nip' => '000',
-                    'name' => strtoupper($statuss),
+                    'nama_petugas' => strtoupper($statuss),
                     'email' => $username . '@sikep.com',
                     'password' => Hash::make('123'),
                     'status' => strtolower($statuss),
@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert($users);
         DB::table('users')->insert([
             'nip' => '666',
-            'name' => 'admin',
+            'nama_petugas' => 'admin',
             'email' => 'admin@sikep.com',
             'password' => Hash::make('123'),
             'status' => 'admin',

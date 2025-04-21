@@ -19,7 +19,8 @@ class LogbookPKICU extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'nip',
+        'id',
+        'no_rm',
         'assesment_resiko_jatuh',
         'menerima_dan_mengerjakan_dokumentasi_pasien_baru_dewasa_dan_anak',
         'melakukan_sbar_dan_tbak',
@@ -50,9 +51,11 @@ class LogbookPKICU extends Model
         'memberikan_obat_sublingual',
         'menghitung_tetesan_infus',
         'catatan',
+        'nip',
+        'status_validasi',
         'validator',
         'created_at',
-        'updated_at',
+        'waktu_validasi',
     ];
 
     /**
@@ -64,7 +67,6 @@ class LogbookPKICU extends Model
     {
         return [
             'created_at' => 'timestamp',
-            'updated_at' => 'timestamp'
         ];
     }
 }

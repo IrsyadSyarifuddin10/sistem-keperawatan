@@ -142,8 +142,8 @@ $v_supervisi_formatted = array_map(function ($item) {
                                 nip: nip
                             },
                             success: function(response) {
-                                if (response.name) {
-                                    $("#name_confirmation").val(response.name);
+                                if (response.nama_petugas) {
+                                    $("#name_confirmation").val(response.nama_petugas);
                                 } else {
                                     alert("NIP tidak ditemukan!");
                                     $("#name_confirmation").val(
@@ -178,7 +178,8 @@ $v_supervisi_formatted = array_map(function ($item) {
                                 <x-input-error :messages="$errors->get('nip_confirmation')" class="mt-2" />
                             </div>
                             <div class="mt-4 flex-1 mx-2">
-                                <x-input-label for="name_confirmation" :value="__('Pastikan nama yang otomatis muncul')" />
+                                <x-input-label for="name_confirmation"
+                                    :value="__('Pastikan nama yang otomatis muncul')" />
 
                                 <x-text-input id="name_confirmation" class="block mt-1 w-full" type="text"
                                     disabled="true" name="name_confirmation" />
@@ -218,8 +219,8 @@ $v_supervisi_formatted = array_map(function ($item) {
                                             <input type="hidden" name="{{ $fitem }}" value="belum">
 
                                             <!-- Checkbox: jika dicentang, nilainya "tercapai" -->
-                                            <input type="checkbox" value="sudah" name="{{ $fitem }}"
-                                                id="{{ $fitem }}" class="sr-only peer">
+                                            <input type="checkbox" value="sudah" name="{{ $fitem }}" id="{{ $fitem }}"
+                                                class="sr-only peer">
 
                                             <div
                                                 class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
@@ -235,25 +236,25 @@ $v_supervisi_formatted = array_map(function ($item) {
                             <textarea name="catatan_supervisi" class="form-control mx-2 w-full" rows="3"></textarea>
                         </div>
                         @if(in_array(auth()->user()->role, ['admin', 'bk']))
-                            <div class="flex flex-row pt-4 px-6 justify-end">
-                                <div class="align-middletext-sm whitespace-normal p-4 text-left text-blueGray-700">
-                                    Verifikasi?
-                                </div>
-                                <td>
-                                    <label class="inline-flex items-center cursor-pointer">
-                                        <!-- Hidden input untuk nilai default "tidak tercapai" -->
-                                        <input type="hidden" name="status_verifikasi" value="tidak tercapai">
-
-                                        <!-- Checkbox: jika dicentang, nilainya "tercapai" -->
-                                        <input type="checkbox" value="tercapai" name="status_verifikasi" id="status_verifikasi"
-                                            class="sr-only peer">
-
-                                        <div
-                                            class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
-                                        </div>
-                                    </label>
-                                </td>
+                        <div class="flex flex-row pt-4 px-6 justify-end">
+                            <div class="align-middletext-sm whitespace-normal p-4 text-left text-blueGray-700">
+                                Verifikasi?
                             </div>
+                            <td>
+                                <label class="inline-flex items-center cursor-pointer">
+                                    <!-- Hidden input untuk nilai default "tidak tercapai" -->
+                                    <input type="hidden" name="status_verifikasi" value="tidak tercapai">
+
+                                    <!-- Checkbox: jika dicentang, nilainya "tercapai" -->
+                                    <input type="checkbox" value="tercapai" name="status_verifikasi"
+                                        id="status_verifikasi" class="sr-only peer">
+
+                                    <div
+                                        class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
+                                    </div>
+                                </label>
+                            </td>
+                        </div>
                         @endif
                         <div class="flex flex-row pt-10 justify-end">
                             <a href="{{ route('supervisi') }}"

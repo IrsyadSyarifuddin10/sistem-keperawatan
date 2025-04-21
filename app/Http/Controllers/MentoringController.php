@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Models\Mentoring;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
@@ -25,7 +25,7 @@ class MentoringController extends Controller
         $indexMentoring = DB::table('mentoring')
             ->leftJoin('users as nipUsers', 'mentoring.nip', '=', 'nipUsers.nip')
             ->leftJoin('users as mentorUsers', 'mentoring.mentor', '=', 'mentorUsers.nip')
-            ->select(['mentoring.created_at', 'nipUsers.nip as nip', 'nipUsers.name as name', 'mentorUsers.nip as nipMentor', 'mentorUsers.name as mentor', 'mentoring.status_verifikasi'])
+            ->select(['mentoring.created_at', 'nipUsers.nip as nip', 'nipUsers.nama_petugas as nama_petugas', 'mentorUsers.nip as nipMentor', 'mentorUsers.nama_petugas as mentor', 'mentoring.status_verifikasi'])
             ->paginate(5);
 
         return view('mentoring.mentoring', compact('indexMentoring')); // Kirim data ke view
@@ -66,42 +66,43 @@ class MentoringController extends Controller
         return redirect(route('mentoring', absolute: false));
     }
 
-    public function indexEdit($created_at, $nip, $nipMentor) {
-    $indexEditMentoring = DB::table('mentoring')
-        ->leftJoin('users', 'mentoring.nip', '=', 'users.nip')
-        ->select([
-            'mentoring.nip',
-            'mentoring.visi_misi_motto_dan_nilai_nilai_dasar_rsia_puti_bungsu',
-            'mentoring.struktur_organisasi_rsia_puti_bungsu',
-            'mentoring.dokter_umum_dan_dokter_spesialis_rsia_puti_bungsu',
-            'mentoring.pelayanan_unggulan_rsia_puti_bungsu',
-            'mentoring.alur_perizinan_rsia_puti_bungsu',
-            'mentoring.peraturan_rsia_puti_bungsu',
-            'mentoring.disiplin_dan_tata_tertib_kerja_rsia_puti_bungsu',
-            'mentoring.budaya_5s',
-            'mentoring.komunikasi_interpersonal_dalam_melaksanakan_tindakan_keperawatan',
-            'mentoring.prinsip_etika_dan_etiket_keperawatan',
-            'mentoring.menerapkan_prinsip_prinsip_pencegahan_infeksi_nosocomial',
-            'mentoring.melakukan_ttv',
-            'mentoring.insiden_keselamatan_pasien',
-            'mentoring.pasien_safety',
-            'mentoring.assasmen_resiko_jatuh',
-            'mentoring.transportasi_pasien',
-            'mentoring.memberikan_obat_dengan_cara_aman_dan_tepat',
-            'mentoring.memfasilitasi_pemenuhan_kebutuhan_cairan_dan_elektrolit',
-            'mentoring.mengelola_pemberian_darah_dan_produk_darah',
-            'mentoring.memfasilitasi_pemenuhan_kebutuhan_oksigen',
-            'mentoring.melakukan_perawatan_luka',
-            'mentoring.analisa_interpretasi_data_dan_dokumen_secara_akurat',
-            'mentoring.pembinaan_staf_keperawatan',
-            'mentoring.caring',
-            'mentoring.catatan',
-            'users.name' // Perbaikan alias
-        ])
-        ->where('mentoring.created_at', $created_at)
-        ->where('mentoring.nip', $nip)
-        ->where('mentoring.mentor', $nipMentor)
-        ->first(); // Jika hanya satu baris, gunakan first()
+    public function indexEdit($created_at, $nip, $nipMentor)
+    {
+        $indexEditMentoring = DB::table('mentoring')
+            ->leftJoin('users', 'mentoring.nip', '=', 'users.nip')
+            ->select([
+                'mentoring.nip',
+                'mentoring.visi_misi_motto_dan_nilai_nilai_dasar_rsia_puti_bungsu',
+                'mentoring.struktur_organisasi_rsia_puti_bungsu',
+                'mentoring.dokter_umum_dan_dokter_spesialis_rsia_puti_bungsu',
+                'mentoring.pelayanan_unggulan_rsia_puti_bungsu',
+                'mentoring.alur_perizinan_rsia_puti_bungsu',
+                'mentoring.peraturan_rsia_puti_bungsu',
+                'mentoring.disiplin_dan_tata_tertib_kerja_rsia_puti_bungsu',
+                'mentoring.budaya_5s',
+                'mentoring.komunikasi_interpersonal_dalam_melaksanakan_tindakan_keperawatan',
+                'mentoring.prinsip_etika_dan_etiket_keperawatan',
+                'mentoring.menerapkan_prinsip_prinsip_pencegahan_infeksi_nosocomial',
+                'mentoring.melakukan_ttv',
+                'mentoring.insiden_keselamatan_pasien',
+                'mentoring.pasien_safety',
+                'mentoring.assasmen_resiko_jatuh',
+                'mentoring.transportasi_pasien',
+                'mentoring.memberikan_obat_dengan_cara_aman_dan_tepat',
+                'mentoring.memfasilitasi_pemenuhan_kebutuhan_cairan_dan_elektrolit',
+                'mentoring.mengelola_pemberian_darah_dan_produk_darah',
+                'mentoring.memfasilitasi_pemenuhan_kebutuhan_oksigen',
+                'mentoring.melakukan_perawatan_luka',
+                'mentoring.analisa_interpretasi_data_dan_dokumen_secara_akurat',
+                'mentoring.pembinaan_staf_keperawatan',
+                'mentoring.caring',
+                'mentoring.catatan',
+                'users.nama_petugas' // Perbaikan alias
+            ])
+            ->where('mentoring.created_at', $created_at)
+            ->where('mentoring.nip', $nip)
+            ->where('mentoring.mentor', $nipMentor)
+            ->first(); // Jika hanya satu baris, gunakan first()
 
         // Pastikan data ditemukan
         if (!$indexEditMentoring) {
@@ -146,7 +147,7 @@ class MentoringController extends Controller
         } else {
             return redirect()->back()->with('error', 'Data tidak ditemukan.');
         }
-        
+
         return redirect()->route('mentoring');
     }
 

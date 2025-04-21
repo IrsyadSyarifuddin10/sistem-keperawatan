@@ -54,7 +54,7 @@
                             <td class="px-4 py-3">
                                 {{ \Carbon\Carbon::parse($mentoringIndex->created_at)->format('d-m-Y H:i') }}
                             </td>
-                            <td class="px-4 py-3">{{ $mentoringIndex->name }}</td>
+                            <td class="px-4 py-3">{{ $mentoringIndex->nama_petugas }}</td>
                             <td class="px-4 py-3">{{ $mentoringIndex->mentor }}</td>
                             <td class="px-4 py-3">{{ $mentoringIndex->status_verifikasi }}</td>
                             <td class="flex flex-row justify-end gap-2 px-4 py-3 text-right">

@@ -19,7 +19,8 @@ class LogbookPKRalan extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'nip',
+        'id',
+        'no_rm',
         'serah_terima_dan_mengerjakan_dok_pasien_baru_dewasa_dan_anak',
         'memasang_gelang_identitas_pasien_sesuai_prosedur',
         'melakukan_sbar_dan_tbak',
@@ -49,9 +50,11 @@ class LogbookPKRalan extends Model
         'memberikan_obat_sublingual',
         'melakukan_pendidikan_kesehatan',
         'catatan',
+        'nip',
+        'status_validasi',
         'validator',
         'created_at',
-        'updated_at',
+        'waktu_validasi',
     ];
 
     /**
@@ -63,7 +66,6 @@ class LogbookPKRalan extends Model
     {
         return [
             'created_at' => 'timestamp',
-            'updated_at' => 'timestamp'
         ];
     }
 }

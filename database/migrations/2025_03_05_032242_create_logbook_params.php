@@ -47,6 +47,9 @@ return new class extends Migration {
             $table->enum('memberikan_perawatan_pada_pasien_yang_akan_meninggal', ['sesuai', 'tidak sesuai']);
             $table->enum('memberikan_perawatan_pada_pasien_baru_meninggal', ['sesuai', 'tidak sesuai']);
             $table->string('catatan')->nullable();
+            $table->string('nip', 12);
+            $table->foreign('nip')->references('nip')->on('users');
+            $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
             $table->string('validator', 12);
             $table->foreign('validator')->references('nip')->on('users');
             $table->timestamp('created_at')->nullable();
@@ -89,6 +92,8 @@ return new class extends Migration {
             $table->enum('memasang_ngt_ogt', ['sesuai', 'tidak sesuai']);
             $table->enum('melakukan_pendidikan_kesehatan', ['sesuai', 'tidak sesuai']);
             $table->string('catatan')->nullable();
+            $table->string('nip', 12);
+            $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
             $table->string('validator', 12);
             $table->foreign('validator')->references('nip')->on('users');
@@ -129,6 +134,8 @@ return new class extends Migration {
             $table->enum('memberikan_obat_sublingual', ['sesuai', 'tidak sesuai']);
             $table->enum('melakukan_pendidikan_kesehatan', ['sesuai', 'tidak sesuai']);
             $table->string('catatan')->nullable();
+            $table->string('nip', 12);
+            $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
             $table->string('validator', 12);
             $table->foreign('validator')->references('nip')->on('users');
@@ -165,6 +172,8 @@ return new class extends Migration {
             $table->enum('mengukur_saturasi_oksigen', ['sesuai', 'tidak sesuai']);
             $table->enum('assesment_resiko_jatuh', ['sesuai', 'tidak sesuai']);
             $table->string('catatan')->nullable();
+            $table->string('nip', 12);
+            $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
             $table->string('validator', 12);
             $table->foreign('validator')->references('nip')->on('users');
@@ -204,6 +213,8 @@ return new class extends Migration {
             $table->enum('melakukan_dokumentasi_sign_in_dan_sign_out', ['sesuai', 'tidak sesuai']);
             $table->enum('melakukan_observasi_pasien_post_operasi', ['sesuai', 'tidak sesuai']);
             $table->string('catatan')->nullable();
+            $table->string('nip', 12);
+            $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
             $table->string('validator', 12);
             $table->foreign('validator')->references('nip')->on('users');
@@ -245,6 +256,8 @@ return new class extends Migration {
             $table->enum('memberikan_obat_sublingual', ['sesuai', 'tidak sesuai']);
             $table->enum('menghitung_tetesan_infus', ['sesuai', 'tidak sesuai']);
             $table->string('catatan')->nullable();
+            $table->string('nip', 12);
+            $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
             $table->string('validator', 12);
             $table->foreign('validator')->references('nip')->on('users');
@@ -288,6 +301,8 @@ return new class extends Migration {
             $table->enum('memberikan_obat_supositori', ['sesuai', 'tidak sesuai']);
             $table->enum('memberikan_obat_vaginal', ['sesuai', 'tidak sesuai']);
             $table->string('catatan')->nullable();
+            $table->string('nip', 12);
+            $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
             $table->string('validator', 12);
             $table->foreign('validator')->references('nip')->on('users');

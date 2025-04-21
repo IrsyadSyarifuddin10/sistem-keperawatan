@@ -19,7 +19,8 @@ class LogbookBK extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'nip',
+        'id',
+        'no_rm',
         'menerima_dan_mengerjakan_dokumentasi_pasien_baru',
         'memberikan_oksigen_inhalasi_o2',
         'melakukan_sbar_dan_tbak',
@@ -52,9 +53,11 @@ class LogbookBK extends Model
         'memberikan_obat_supositori',
         'memberikan_obat_vaginal',
         'catatan',
+        'nip',
+        'status_validasi',
         'validator',
         'created_at',
-        'updated_at',
+        'waktu_validasi',
     ];
 
     /**
@@ -66,7 +69,6 @@ class LogbookBK extends Model
     {
         return [
             'created_at' => 'timestamp',
-            'updated_at' => 'timestamp'
         ];
     }
 }
