@@ -19,6 +19,7 @@ class Mentoring extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'id',
         'nip',
         'visi_misi_motto_dan_nilai_nilai_dasar_rsia_puti_bungsu',
         'struktur_organisasi_rsia_puti_bungsu',

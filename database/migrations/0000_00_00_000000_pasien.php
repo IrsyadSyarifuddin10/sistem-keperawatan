@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pasien', function (Blueprint $table) {
             $table->string('no_rm', 6)->primary();
             $table->string('nama_pasien');
+            $table->timestamps();
         });
     }
 

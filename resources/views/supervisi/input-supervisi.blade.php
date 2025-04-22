@@ -235,7 +235,7 @@ $v_supervisi_formatted = array_map(function ($item) {
                             <x-input-label for="catatan_supervisi" :value="__('Catatan')" />
                             <textarea name="catatan_supervisi" class="form-control mx-2 w-full" rows="3"></textarea>
                         </div>
-                        @if(in_array(auth()->user()->role, ['admin', 'bk']))
+                        {{-- @if(in_array(auth()->user()->role, ['admin', 'bk']))
                         <div class="flex flex-row pt-4 px-6 justify-end">
                             <div class="align-middletext-sm whitespace-normal p-4 text-left text-blueGray-700">
                                 Verifikasi?
@@ -255,7 +255,7 @@ $v_supervisi_formatted = array_map(function ($item) {
                                 </label>
                             </td>
                         </div>
-                        @endif
+                        @endif --}}
                         <div class="flex flex-row pt-10 justify-end">
                             <a href="{{ route('supervisi') }}"
                                 class="float-right w-20 mx-2 pl-6 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 hover:bg-orange-800 focus:ring-4 focus:ring-purple-300 rounded-lg text-sm dark:bg-amber-400 dark:hover:bg-amber-600 dark:focus:ring-purple-900">

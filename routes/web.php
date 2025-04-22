@@ -31,9 +31,9 @@ Route::middleware('auth')->group(function () {
         return view('mentoring/input-mentoring');
     })->name('input-mentoring');        // Masuk view input-mentoring
     Route::post('/input-data-mentoring', [MentoringController::class, 'store'])->name('input-data-mentoring');
-    Route::get('/edit-mentoring/{created_at}/{nip}/{nipMentor}', [MentoringController::class, 'indexEdit'])->name('edit-mentoring');
+    Route::get('/edit-mentoring/{id}/{nip}/{nipMentor}', [MentoringController::class, 'indexEdit'])->name('edit-mentoring');
     Route::post('/edit-data-mentoring', [MentoringController::class, 'update'])->name('edit-data-mentoring');
-    Route::delete('/mentoring/{created_at}/{nip}/{nipMentor}', [MentoringController::class, 'destroy'])->name('delete-data-mentoring');
+    Route::delete('/mentoring/{id}/{nip}/{nipMentor}', [MentoringController::class, 'destroy'])->name('delete-data-mentoring');
 
 
     // Supervisi
@@ -42,9 +42,9 @@ Route::middleware('auth')->group(function () {
         return view('supervisi/input-supervisi');
     })->name('input-supervisi');
     Route::post('/input-data-supervisi', [SupervisiController::class, 'store'])->name('input-data-supervisi');
-    Route::get('/edit-supervisi/{created_at}/{nip}/{nipSupervisor}', [SupervisiController::class, 'indexEdit'])->name('edit-supervisi');
+    Route::get('/edit-supervisi/{id}/{nip}/{nipSupervisor}', [SupervisiController::class, 'indexEdit'])->name('edit-supervisi');
     Route::post('/edit-data-supervisi', [SupervisiController::class, 'update'])->name('edit-data-supervisi');
-    Route::delete('/supervisi/{created_at}/{nip}/{nipSupervisor}', [SupervisiController::class, 'destroy'])->name('delete-data-supervisi');
+    Route::delete('/supervisi/{id}/{nip}/{nipSupervisor}', [SupervisiController::class, 'destroy'])->name('delete-data-supervisi');
 
     // Logbook
     Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook');

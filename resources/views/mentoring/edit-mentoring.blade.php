@@ -72,6 +72,12 @@ $v_mentoring_formatted = array_map(function ($item) {
 
                                 <x-input-error :messages="$errors->get('name_confirmation')" class="mt-2" />
                             </div>
+                            <x-text-input id="id" class="block mt-1 w-full" type="hidden"
+                                value="{{ $indexEditMentoring->id }}" name="id" />
+                            <x-input-error :messages="$errors->get('id')" class="mt-2" />
+                            <x-text-input id="nipMentor" class="block mt-1 w-full" type="hidden"
+                                value="{{ $indexEditMentoring->mentor }}" name="nipMentor" />
+                            <x-input-error :messages="$errors->get('nipMentor')" class="mt-2" />
                         </div>
                         <table id="tbSupervisi" class="items-center bg-transparent w-full">
                             <thead

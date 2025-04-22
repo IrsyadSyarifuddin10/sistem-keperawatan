@@ -19,6 +19,7 @@ class Supervisi extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'id',
         'nip',
         'menerima_dan_mengerjakan_dokumentasi_pasien_baru',
         'memberikan_oksigen',

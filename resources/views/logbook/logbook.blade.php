@@ -11,7 +11,7 @@
                 <div class="text-gray-900 block w-full overflow-x-auto">
                     <div class="flex flex-row w-full py-2 justify-between">
                         <div class="font-semibold text-4xl text-gray-800 leading-tight">
-                            {{ __("Data Logbook :name", ['name' => Auth::user()->name]) }}
+                            {{ __("Data Logbook :name", ['name' => Auth::user()->nama_petugas]) }}
                         </div>
                         <div class="flex items-center">
                             <label for="first_name"

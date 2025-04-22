@@ -60,25 +60,25 @@
                             <td class="flex flex-row justify-end gap-2 px-4 py-3 text-right">
                                 <!-- Form untuk Edit -->
                                 <form
-                                    action="{{ route('edit-mentoring', ['created_at' => $mentoringIndex->created_at,'nip'=>$mentoringIndex->nip,'nipMentor'=>$mentoringIndex->nipMentor ]) }}"
+                                    action="{{ route('edit-mentoring', ['id' => $mentoringIndex->id,'nip'=>$mentoringIndex->nip,'nipMentor'=>$mentoringIndex->nipMentor ]) }}"
                                     method="GET">
                                     @csrf
-                                    <input type="hidden" name="created_at" value="{{ $mentoringIndex->created_at }}" />
+                                    <input type="hidden" name="id" value="{{ $mentoringIndex->id }}" />
                                     <input type="hidden" name="nip" value="{{ $mentoringIndex->nip }}" />
-                                    <input type="hidden" name="nip-mentor" value="{{ $mentoringIndex->nipMentor }}" />
+                                    <input type="hidden" name="nipMentor" value="{{ $mentoringIndex->nipMentor }}" />
                                     <button id="btnUbahMentoring" type="submit"
                                         class="mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
                                         <i class="bi bi-pencil-fill"></i>
                                     </button>
                                 </form>
 
-                                <!-- Tombol Hapus -->
                                 <form
-                                    action="{{ route('delete-data-mentoring', ['created_at' => $mentoringIndex->created_at,'nip' => $mentoringIndex->nip,'nipMentor' => $mentoringIndex->nipMentor,]) }}"
-                                    method="POST">
-                                    @csrf @method('DELETE')
-                                    <button
-                                        class="btnHapusMentoring mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
+                                    action="{{ route('delete-data-mentoring', ['id' => $mentoringIndex->id, 'nip' => $mentoringIndex->nip, 'nipMentor' => $mentoringIndex->nipMentor]) }}"
+                                    method="POST" class="form-hapus-mentoring">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button"
+                                        class="confirm-delete mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
                                         <i class="bi bi-trash3-fill"></i>
                                     </button>
                                 </form>

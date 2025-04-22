@@ -22,7 +22,7 @@ class SupervisiController extends Controller
         $indexSupervisi = DB::table('supervisi')
             ->leftJoin('users as nipUsers', 'supervisi.nip', '=', 'nipUsers.nip')
             ->leftJoin('users as supervisorUsers', 'supervisi.supervisor', '=', 'supervisorUsers.nip')
-            ->select(['supervisi.created_at', 'nipUsers.nip as nip', 'nipUsers.nama_petugas as nama_petugas', 'supervisorUsers.nip as nipSupervisor', 'supervisorUsers.nama_petugas as supervisor', 'supervisi.status_verifikasi'])
+            ->select(['supervisi.created_at', 'supervisi.id', 'nipUsers.nip as nip', 'nipUsers.nama_petugas as nama_petugas', 'supervisorUsers.nip as nipSupervisor', 'supervisorUsers.nama_petugas as supervisor', 'supervisi.status_verifikasi'])
             ->paginate(5);
 
         return view('supervisi.supervisi', compact('indexSupervisi')); // Kirim data ke view
@@ -90,14 +90,15 @@ class SupervisiController extends Controller
             'supervisor' => Auth::user()->nip,
         ]);
 
-        return redirect(route('supervisi', absolute: false));
+        return redirect()->route('supervisi')->with('success', 'Data berhasil disimpan.');
     }
 
-    public function indexEdit($created_at, $nip, $nipSupervisor)
+    public function indexEdit($id, $nip, $nipSupervisor)
     {
         $indexEditSupervisi = DB::table('supervisi')
             ->leftJoin('users', 'supervisi.nip', '=', 'users.nip')
             ->select([
+                "supervisi.id",
                 "supervisi.nip",
                 "supervisi.menerima_dan_mengerjakan_dokumentasi_pasien_baru",
                 "supervisi.memberikan_oksigen",
@@ -155,9 +156,10 @@ class SupervisiController extends Controller
                 "supervisi.mengoperasionalkan_cpap",
                 "supervisi.mengoperasionalkan_ventilator",
                 "supervisi.catatan",
+                "supervisi.supervisor",
                 'users.nama_petugas' // Perbaikan alias
             ])
-            ->where('supervisi.created_at', $created_at)
+            ->where('supervisi.id', $id)
             ->where('supervisi.nip', $nip)
             ->where('supervisi.supervisor', $nipSupervisor)
             ->first(); // Jika hanya satu baris, gunakan first()
@@ -172,7 +174,10 @@ class SupervisiController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
-        $supervisi = Supervisi::where('nip', $request->nip_confirmation)->first(); // Cari data berdasarkan NIP
+        $supervisi = Supervisi::where('nip', $request->nip_confirmation)
+            ->where('id', $request->id)
+            ->where('supervisor', $request->nipSupervisor)
+            ->first();
 
         if ($supervisi) {
             $supervisi->update([
@@ -233,16 +238,17 @@ class SupervisiController extends Controller
                 "mengoperasionalkan_ventilator" => $request->mengoperasionalkan_ventilator,
                 "catatan" => $request->catatan_supervisi,
             ]);
+            return redirect()->route('supervisi')->with('success', 'Data berhasil diperbarui.');
         } else {
-            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+            return redirect()->route('supervisi')->with('error', 'Data tidak ditemukan.');
         }
 
         return redirect()->route('supervisi');
     }
 
-    public function destroy($created_at, $nip, $nipSupervisor)
+    public function destroy($id, $nip, $nipSupervisor)
     {
-        DB::table('supervisi')->where('created_at', $created_at)->where('nip', $nip)->where('supervisor', $nipSupervisor)->delete();
+        DB::table('supervisi')->where('id', $id)->where('nip', $nip)->where('supervisor', $nipSupervisor)->delete();
 
         // Redirect dengan pesan sukses
         return redirect()->route('supervisi')->with('success', 'Data berhasil dihapus!');

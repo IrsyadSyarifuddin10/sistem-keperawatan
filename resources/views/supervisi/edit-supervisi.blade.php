@@ -166,7 +166,7 @@ $v_supervisi_formatted = array_map(function ($item) {
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6 ">
                     <div class="p-3 text-gray-900 block w-full overflow-x-auto">
                         <div class="p-3 text-2xl font-black">
-                            Input Supervisi
+                            Edit Supervisi
                         </div>
                         <div class="p-3 flex flex-row">
                             <div class="mt-4 flex-1 mx-2">
@@ -186,6 +186,12 @@ $v_supervisi_formatted = array_map(function ($item) {
 
                                 <x-input-error :messages="$errors->get('name_confirmation')" class="mt-2" />
                             </div>
+                            <x-text-input id="id" class="block mt-1 w-full" type="hidden"
+                                value="{{ $indexEditSupervisi->id }}" name="id" />
+                            <x-input-error :messages="$errors->get('id')" class="mt-2" />
+                            <x-text-input id="nipSupervisor" class="block mt-1 w-full" type="hidden"
+                                value="{{ $indexEditSupervisi->supervisor }}" name="nipSupervisor" />
+                            <x-input-error :messages="$errors->get('nipSupervisor')" class="mt-2" />
                         </div>
                         <table id="tbSupervisi" class="items-center bg-transparent w-full">
                             <thead
@@ -251,7 +257,6 @@ $v_supervisi_formatted = array_map(function ($item) {
                                 {{ __('Ubah') }}
                             </x-primary-button>
                         </div>
-
                     </div>
                 </div>
             </div>

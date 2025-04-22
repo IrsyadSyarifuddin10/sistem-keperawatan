@@ -25,7 +25,7 @@ class MentoringController extends Controller
         $indexMentoring = DB::table('mentoring')
             ->leftJoin('users as nipUsers', 'mentoring.nip', '=', 'nipUsers.nip')
             ->leftJoin('users as mentorUsers', 'mentoring.mentor', '=', 'mentorUsers.nip')
-            ->select(['mentoring.created_at', 'nipUsers.nip as nip', 'nipUsers.nama_petugas as nama_petugas', 'mentorUsers.nip as nipMentor', 'mentorUsers.nama_petugas as mentor', 'mentoring.status_verifikasi'])
+            ->select(['mentoring.created_at', 'mentoring.id', 'nipUsers.nip as nip', 'nipUsers.nama_petugas as nama_petugas', 'mentorUsers.nip as nipMentor', 'mentorUsers.nama_petugas as mentor', 'mentoring.status_verifikasi'])
             ->paginate(5);
 
         return view('mentoring.mentoring', compact('indexMentoring')); // Kirim data ke view
@@ -33,7 +33,7 @@ class MentoringController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $mentoring = Mentoring::create([
+        Mentoring::create([
             'nip' => $request->nip_confirmation,
             'visi_misi_motto_dan_nilai_nilai_dasar_rsia_puti_bungsu' => $request->visi_misi_motto_dan_nilai_nilai_dasar_rsia_puti_bungsu,
             'struktur_organisasi_rsia_puti_bungsu' => $request->struktur_organisasi_rsia_puti_bungsu,
@@ -63,14 +63,15 @@ class MentoringController extends Controller
             'mentor' => Auth::user()->nip,
         ]);
 
-        return redirect(route('mentoring', absolute: false));
+        return redirect()->route('mentoring')->with('success', 'Data berhasil disimpan.');
     }
 
-    public function indexEdit($created_at, $nip, $nipMentor)
+    public function indexEdit($id, $nip, $nipMentor)
     {
         $indexEditMentoring = DB::table('mentoring')
             ->leftJoin('users', 'mentoring.nip', '=', 'users.nip')
             ->select([
+                'mentoring.id',
                 'mentoring.nip',
                 'mentoring.visi_misi_motto_dan_nilai_nilai_dasar_rsia_puti_bungsu',
                 'mentoring.struktur_organisasi_rsia_puti_bungsu',
@@ -97,9 +98,11 @@ class MentoringController extends Controller
                 'mentoring.pembinaan_staf_keperawatan',
                 'mentoring.caring',
                 'mentoring.catatan',
+                'mentoring.created_at',
+                'mentoring.mentor',
                 'users.nama_petugas' // Perbaikan alias
             ])
-            ->where('mentoring.created_at', $created_at)
+            ->where('mentoring.id', $id)
             ->where('mentoring.nip', $nip)
             ->where('mentoring.mentor', $nipMentor)
             ->first(); // Jika hanya satu baris, gunakan first()
@@ -114,7 +117,10 @@ class MentoringController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
-        $mentoring = Mentoring::where('nip', $request->nip_confirmation)->first(); // Cari data berdasarkan NIP
+        $mentoring = Mentoring::where('nip', $request->nip_confirmation)
+            ->where('id', $request->id)
+            ->where('mentor', $request->nipMentor)
+            ->first();
 
         if ($mentoring) {
             $mentoring->update([
@@ -144,17 +150,17 @@ class MentoringController extends Controller
                 'caring' => $request->caring,
                 'catatan' => $request->catatan_mentoring,
             ]);
+            return redirect()->route('mentoring')->with('success', 'Data berhasil diperbarui.');
         } else {
-            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+            return redirect()->route('mentoring')->with('error', 'Data tidak ditemukan.');
         }
 
         return redirect()->route('mentoring');
     }
 
-    public function destroy($created_at, $nip, $nipMentor)
+    public function destroy($id, $nip, $nipMentor)
     {
-        DB::table('mentoring')->where('created_at', $created_at)->where('nip', $nip)->where('mentor', $nipMentor)->delete();
-
+        DB::table('mentoring')->where('id', $id)->where('nip', $nip)->where('mentor', $nipMentor)->delete();
         // Redirect dengan pesan sukses
         return redirect()->route('mentoring')->with('success', 'Data berhasil dihapus!');
     }

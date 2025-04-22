@@ -57,10 +57,10 @@
                             <td class="px-4 py-3 text-right flex flex-row justify-end gap-2">
                                 <!-- Form untuk Edit -->
                                 <form
-                                    action="{{ route('edit-supervisi', ['created_at' => $supervisiIndex->created_at,'nip'=>$supervisiIndex->nip,'nipSupervisor'=>$supervisiIndex->nipSupervisor ]) }}"
+                                    action="{{ route('edit-supervisi', ['id' => $supervisiIndex->id,'nip'=>$supervisiIndex->nip,'nipSupervisor'=>$supervisiIndex->nipSupervisor ]) }}"
                                     method="GET">
                                     @csrf
-                                    <input type="hidden" name="created_at" value="{{ $supervisiIndex->created_at }}" />
+                                    <input type="hidden" name="id" value="{{ $supervisiIndex->id }}" />
                                     <input type="hidden" name="nip" value="{{ $supervisiIndex->nip }}" />
                                     <input type="hidden" name="nip-supervisor"
                                         value="{{ $supervisiIndex->nipSupervisor }}" />
@@ -70,16 +70,13 @@
                                     </button>
                                 </form>
 
-                                <!-- Tombol Hapus -->
-                                <form action="{{ route('delete-data-supervisi', [
-                                'created_at' => $supervisiIndex->created_at,
-                                'nip' => $supervisiIndex->nip,
-                                'nipSupervisor' => $supervisiIndex->nipSupervisor
-                            ]) }}" method="POST">
+                                <form
+                                    action="{{ route('delete-data-supervisi', ['id' => $supervisiIndex->id, 'nip' => $supervisiIndex->nip, 'nipSupervisor' => $supervisiIndex->nipSupervisor]) }}"
+                                    method="POST" class="form-hapus-supervisor">
                                     @csrf
                                     @method('DELETE')
-                                    <button
-                                        class="btnHapusMentoring mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
+                                    <button type="button"
+                                        class="confirm-delete mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
                                         <i class="bi bi-trash3-fill"></i>
                                     </button>
                                 </form>
