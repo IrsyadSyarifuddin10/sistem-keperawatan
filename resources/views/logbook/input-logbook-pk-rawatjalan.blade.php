@@ -76,7 +76,7 @@ $v_logbook_pk_ralan_formatted = array_map(function ($item) {
 }, $v_logbook_pk_ralan);
 ?>
 
-    <form action="{{ route('input-logbook-pk-rawatjalan') }}" method="POST">
+    <form action="{{ route('input-data-logbook') }}" method="POST">
         <div class="py-12">
             <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 lg:px-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6  ">
