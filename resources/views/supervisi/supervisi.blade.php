@@ -76,7 +76,8 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="button"
-                                        class="confirm-delete mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
+                                        class="confirm-submit mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black"
+                                        data-action="hapus">
                                         <i class="bi bi-trash3-fill"></i>
                                     </button>
                                 </form>
