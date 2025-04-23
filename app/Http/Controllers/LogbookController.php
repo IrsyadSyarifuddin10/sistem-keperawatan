@@ -272,10 +272,18 @@ class LogbookController extends Controller
         $data = $request->only($fields);
         $data['nip'] = $user->nip;
 
-        $pasien = Pasien::create([
-            'no_rm' => $request->no_rm,
-            'nama_pasien' => $request->nama_pasien,
-        ]);
+        // Cek apakah pasien sudah ada
+        $pasien = Pasien::where('no_rm', $request->no_rm)->first();
+
+        if (!$pasien) {
+            // Jika belum ada, baru buat pasien
+            $pasien = Pasien::create([
+                'no_rm' => $request->no_rm,
+                'nama_pasien' => $request->nama_pasien,
+            ]);
+        }
+
+        // Simpan data logbook
         $model::create($data);
 
         return redirect()->route('logbook')->with('success', 'Logbook berhasil disimpan.');
@@ -308,6 +316,9 @@ class LogbookController extends Controller
             ->leftJoin('pasien', "$table.no_rm", '=', 'pasien.no_rm')
             ->leftJoin('users', "$table.validator", '=', 'users.nip')
             ->select([
+                "$table.id",
+                "$table.nip",
+                "$table.no_rm",
                 "$table.created_at",
                 "$table.no_rm",
                 'pasien.nama_pasien',
@@ -318,5 +329,76 @@ class LogbookController extends Controller
             ->paginate(5);
 
         return view('logbook.logbook', compact('indexLogbook'));
+    }
+
+    public function indexEdit($id, $nip, $no_rm)
+    {
+        $user = Auth::user();
+
+        $tableMap = [
+            'bk' => 'logbook_bk',
+            'pk-ugd' => 'logbook_pk_ugd',
+            'pk-rawat-jalan' => 'logbook_pk_rawatjalan',
+            'pk-rawat-inap' => 'logbook_pk_rawatinap',
+            'pk-perina' => 'logbook_pk_perina',
+            'pk-ok' => 'logbook_pk_ok',
+            'pk-icu' => 'logbook_pk_icu',
+        ];
+
+        $role = $user->role;
+
+        if (!isset($tableMap[$role])) {
+            abort(403, 'Unauthorized role.');
+        }
+
+        $table = $tableMap[$role];
+
+        $indexEditLogbook = DB::table($table)
+            ->leftJoin('pasien', "$table.no_rm", '=', 'pasien.no_rm')
+            ->leftJoin('users', "$table.validator", '=', 'users.nip')
+            ->select([
+                "$table.*",
+                'pasien.nama_pasien',
+                'users.nama_petugas'
+            ])
+            ->where("$table.id", $id)
+            ->where("$table.nip", $nip)
+            ->where("$table.no_rm", $no_rm)
+            ->first();
+
+        // Pastikan data ditemukan
+        if (!$indexEditLogbook) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+
+        return view("logbook.edit-logbook-$role", compact('indexEditLogbook'));
+    }
+
+    public function destroy($id, $nip, $no_rm)
+    {
+
+        $user = Auth::user();
+
+        $tableMap = [
+            'bk' => 'logbook_bk',
+            'pk-ugd' => 'logbook_pk_ugd',
+            'pk-rawat-jalan' => 'logbook_pk_rawatjalan',
+            'pk-rawat-inap' => 'logbook_pk_rawatinap',
+            'pk-perina' => 'logbook_pk_perina',
+            'pk-ok' => 'logbook_pk_ok',
+            'pk-icu' => 'logbook_pk_icu',
+        ];
+
+        $role = $user->role;
+
+        if (!isset($tableMap[$role])) {
+            abort(403, 'Unauthorized role.');
+        }
+
+        $table = $tableMap[$role];
+
+        DB::table("$table")->where('id', $id)->where('nip', $nip)->where('no_rm', $no_rm)->delete();
+        // Redirect dengan pesan sukses
+        return redirect()->route('logbook')->with('success', 'Data berhasil dihapus!');
     }
 }

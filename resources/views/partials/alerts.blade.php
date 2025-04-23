@@ -1,24 +1,26 @@
 <script>
-    document.querySelectorAll('.confirm-delete').forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault();
-            const form = button.closest('form');
-            Swal.fire({
-                title: 'Yakin mau hapus?',
-                text: "Data ini tidak bisa dikembalikan!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
+    document.querySelectorAll('.confirm-submit').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        const form = button.closest('form');
+        const actionType = button.dataset.action || 'simpan'; // bisa "simpan" atau "ubah"
+
+        Swal.fire({
+            title: `Yakin ingin ${actionType} data?`,
+            text: `Pastikan semua data sudah benar sebelum ${actionType}.`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#aaa',
+            confirmButtonText: `Ya, ${actionType}`,
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
         });
     });
+});
 </script>
 @if (session('error'))
 <script>

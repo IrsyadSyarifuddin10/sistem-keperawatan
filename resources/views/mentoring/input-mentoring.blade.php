@@ -128,7 +128,8 @@ $v_mentoring_formatted = array_map(function ($item) {
                                 {{ __('Batal') }}
                             </a>
                             <x-primary-button id="openModal"
-                                class="float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                                class="confirm-submit float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                                data-action="simpan">
                                 {{ __('Simpan') }}
                             </x-primary-button>
                         </div>

@@ -50,10 +50,11 @@ return new class extends Migration {
             $table->string('nip', 12);
             $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
-            $table->string('validator', 12);
+            $table->string('validator', 12)->nullable();
             $table->foreign('validator')->references('nip')->on('users');
-            $table->timestamp('created_at')->nullable();
             $table->timestamp('waktu_validasi')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::create('logbook_pk_rawatinap', function (Blueprint $table) {
@@ -95,10 +96,11 @@ return new class extends Migration {
             $table->string('nip', 12);
             $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
-            $table->string('validator', 12);
+            $table->string('validator', 12)->nullable();
             $table->foreign('validator')->references('nip')->on('users');
-            $table->timestamp('created_at')->nullable();
             $table->timestamp('waktu_validasi')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::create('logbook_pk_rawatjalan', function (Blueprint $table) {
@@ -137,10 +139,11 @@ return new class extends Migration {
             $table->string('nip', 12);
             $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
-            $table->string('validator', 12);
+            $table->string('validator', 12)->nullable();
             $table->foreign('validator')->references('nip')->on('users');
-            $table->timestamp('created_at')->nullable();
             $table->timestamp('waktu_validasi')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::create('logbook_pk_perina', function (Blueprint $table) {
@@ -175,10 +178,11 @@ return new class extends Migration {
             $table->string('nip', 12);
             $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
-            $table->string('validator', 12);
+            $table->string('validator', 12)->nullable();
             $table->foreign('validator')->references('nip')->on('users');
-            $table->timestamp('created_at')->nullable();
             $table->timestamp('waktu_validasi')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::create('logbook_pk_ok', function (Blueprint $table) {
@@ -216,10 +220,11 @@ return new class extends Migration {
             $table->string('nip', 12);
             $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
-            $table->string('validator', 12);
+            $table->string('validator', 12)->nullable();
             $table->foreign('validator')->references('nip')->on('users');
-            $table->timestamp('created_at')->nullable();
             $table->timestamp('waktu_validasi')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::create('logbook_pk_icu', function (Blueprint $table) {
@@ -259,10 +264,11 @@ return new class extends Migration {
             $table->string('nip', 12);
             $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
-            $table->string('validator', 12);
+            $table->string('validator', 12)->nullable();
             $table->foreign('validator')->references('nip')->on('users');
-            $table->timestamp('created_at')->nullable();
             $table->timestamp('waktu_validasi')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::create('logbook_bk', function (Blueprint $table) {
@@ -304,10 +310,11 @@ return new class extends Migration {
             $table->string('nip', 12);
             $table->foreign('nip')->references('nip')->on('users');
             $table->enum('status_validasi', ['tervalidasi', 'belum tervalidasi'])->default('belum tervalidasi');
-            $table->string('validator', 12);
+            $table->string('validator', 12)->nullable();
             $table->foreign('validator')->references('nip')->on('users');
-            $table->timestamp('created_at')->nullable();
             $table->timestamp('waktu_validasi')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

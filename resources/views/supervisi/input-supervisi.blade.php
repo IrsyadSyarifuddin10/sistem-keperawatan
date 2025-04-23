@@ -262,7 +262,8 @@ $v_supervisi_formatted = array_map(function ($item) {
                                 {{ __('Batal') }}
                             </a>
                             <x-primary-button
-                                class="float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 hover:bg-orange-800 focus:ring-4 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                                class="confirm-submit float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 hover:bg-orange-800 focus:ring-4 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                                data-action="simpan">
                                 {{ __('Simpan') }}
                             </x-primary-button>
                         </div>

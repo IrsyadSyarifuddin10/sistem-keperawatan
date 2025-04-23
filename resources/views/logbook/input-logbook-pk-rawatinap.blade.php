@@ -6,30 +6,20 @@
     </x-slot>
 
     <?php
-$f_logbook_bk = [
-    'menerima_dan_mengerjakan_dokumentasi_pasien_baru',
-    'memberikan_oksigen_inhalasi_o2',
+$f_logbook_pk_ranap = [
+    'menerima_dan_mengerjakan_dokumentasi_pasien_baru_dewasa_dan_anak',
     'melakukan_sbar_dan_tbak',
+    'assesment_resiko_jatuh',
+    'assesment_nyeri',
     'mengukur_pernafasan',
     'mengukur_tekanan_nadi',
     'mengukur_tekanan_darah',
     'mengukur_suhu_tubuh',
     'mengukur_saturasi_oksigen',
-    'melakukan_bimbingan_dan_penyuluhan',
-    'melakukan_asuhan_kebidanan',
-    'membantu_proses_persalinan_normal',
-    'melakukan_kebersihan_vulva_vulva_hygiene',
-    'melakukan_observasi_kemajuan_persalinan_kala_i_ii_iii_dan_iv',
-    'melakukan_vt_atau_vaginal_touche',
-    'melakukan_observasi_djj',
-    'melakukan_epistomi',
-    'melakukan_hecting_perineum',
-    'resusitasi_bayi_baru_lahir_spontan',
-    'memasang_catheter_wanita',
-    'memasang_infus_dewasa',
-    'melakukan_gym_ball',
-    'melakukan_pijat_oksitosin',
-    'mengoperasionalkan_ctg',
+    'memberikan_oksigen_inhalasi_o2',
+    'melakukan_balance_cairan',
+    'menyiapkan_dan_memasang_infus_anak',
+    'menyiapkan_dan_memasang_infus_dewasa',
     'melakukan_dan_mendokumentasikan_7_benar_obat',
     'memberikan_obat_per_oral_po',
     'memberikan_obat_intra_venous_iv',
@@ -37,32 +27,32 @@ $f_logbook_bk = [
     'memberikan_obat_intra_cutan_ic',
     'memberikan_obat_sub_cutan_sc',
     'memberikan_obat_supositori',
-    'memberikan_obat_vaginal',
+    'memberikan_obat_vagina',
+    'memasang_catheter',
+    'mengoperasionalkan_ctg',
+    'mengoprasionalkan_ekg',
+    'melakukan_nebulizer',
+    'melakukan_transfusi_darah',
+    'memandikan_pasien',
+    'melakukan_kompres_hangat',
+    'melakukan_ganti_verban',
+    'memasang_ngt_ogt',
+    'melakukan_pendidikan_kesehatan',
 ];
-$v_logbook_bk = [
-    'menerima_dan_mengerjakan_dokumentasi_pasien_baru',
-    'memberikan_oksigen_inhalasi_o2',
+$v_logbook_pk_ranap = [
+    'menerima_dan_mengerjakan_dokumentasi_pasien_baru_dewasa_dan_anak',
     'melakukan_sbar_dan_tbak',
+    'assesment_resiko_jatuh',
+    'assesment_nyeri',
     'mengukur_pernafasan',
     'mengukur_tekanan_nadi',
     'mengukur_tekanan_darah',
     'mengukur_suhu_tubuh',
     'mengukur_saturasi_oksigen',
-    'melakukan_bimbingan_dan_penyuluhan',
-    'melakukan_asuhan_kebidanan',
-    'membantu_proses_persalinan_normal',
-    'melakukan_kebersihan_vulva_vulva_hygiene',
-    'melakukan_observasi_kemajuan_persalinan_kala_i_ii_iii_dan_iv',
-    'melakukan_vt_atau_vaginal_touche',
-    'melakukan_observasi_djj',
-    'melakukan_epistomi',
-    'melakukan_hecting_perineum',
-    'resusitasi_bayi_baru_lahir_spontan',
-    'memasang_catheter_wanita',
-    'memasang_infus_dewasa',
-    'melakukan_gym_ball',
-    'melakukan_pijat_oksitosin',
-    'mengoperasionalkan_ctg',
+    'memberikan_oksigen_inhalasi_o2',
+    'melakukan_balance_cairan',
+    'menyiapkan_dan_memasang_infus_anak',
+    'menyiapkan_dan_memasang_infus_dewasa',
     'melakukan_dan_mendokumentasikan_7_benar_obat',
     'memberikan_obat_per_oral_po',
     'memberikan_obat_intra_venous_iv',
@@ -70,21 +60,31 @@ $v_logbook_bk = [
     'memberikan_obat_intra_cutan_ic',
     'memberikan_obat_sub_cutan_sc',
     'memberikan_obat_supositori',
-    'memberikan_obat_vaginal'
+    'memberikan_obat_vagina',
+    'memasang_catheter',
+    'mengoperasionalkan_ctg',
+    'mengoprasionalkan_ekg',
+    'melakukan_nebulizer',
+    'melakukan_transfusi_darah',
+    'memandikan_pasien',
+    'melakukan_kompres_hangat',
+    'melakukan_ganti_verban',
+    'memasang_ngt_ogt',
+    'melakukan_pendidikan_kesehatan'
 ];
 
-$v_logbook_bk_formatted = array_map(function ($item) {
+$v_logbook_pk_ranap_formatted = array_map(function ($item) {
     return ucwords(str_replace('_', ' ', $item));
-}, $v_logbook_bk);
-    ?>
+}, $v_logbook_pk_ranap);
+?>
 
-    <form action="{{ route('input-data-logbook') }}" method="POST">
+    <form action="{{ route('input-logbook-pk-ranap') }}" method="POST">
         <div class="py-12">
             <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 lg:px-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6  ">
                     <div class="p-3 text-gray-900 block w-full overflow-x-auto">
                         <div class="p-3 text-2xl font-black">
-                            Input Logbook BK
+                            Input Logbook PK Rawat Inap
                         </div>
                         <div class="p-3 flex flex-row">
                             <div class="mt-4 flex-1 mx-2">
@@ -103,7 +103,7 @@ $v_logbook_bk_formatted = array_map(function ($item) {
                                 <x-input-error :messages="$errors->get('nama_pasien')" class="mt-2" />
                             </div>
                         </div>
-                        <table id="tbLogbookBK" class="items-center bg-transparent w-full">
+                        <table id="tbLogbookPKRawatInap" class="items-center bg-transparent w-full">
                             <thead
                                 class="text-gray-100 uppercase bg-gray-700 dark:bg-gray-700 dark:text-gray-100 text-xs">
                                 <tr>
@@ -119,8 +119,8 @@ $v_logbook_bk_formatted = array_map(function ($item) {
                             </thead>
                             <tbody>
                                 @csrf
-                                <?php foreach ($v_logbook_bk_formatted as $index => $item): ?>
-                                <?php    $fitem = $f_logbook_bk[$index] ?? null; ?>
+                                <?php foreach ($v_logbook_pk-ranap_formatted as $index => $item): ?>
+                                <?php    $fitem = $f_logbook_pk-ranap[$index] ?? null; ?>
                                 <tr>
                                     <!-- Kolom Pertama: Nama Supervisi -->
                                     <td
@@ -150,7 +150,7 @@ $v_logbook_bk_formatted = array_map(function ($item) {
                         <div class="flex flex-row pt-4 px-6">
                             <x-input-label for="catatan_logbook" :value="__('Catatan')" />
                             <textarea name="catatan_logbook" class="form-control mx-2 w-full"
-                                rows="3">{{ $logbookBKData['catatan'] ?? '' }}</textarea>
+                                rows="3">{{ $logbookPKRawatInapData['catatan'] ?? '' }}</textarea>
                         </div>
                         <div class="flex flex-row pt-10 justify-end">
                             <a href="{{ route('logbook') }}"

@@ -5,6 +5,7 @@ use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MentoringController;
 use App\Http\Controllers\SupervisiController;
 use App\Http\Controllers\ProfileController;
+use App\Models\LogbookBK;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,8 +51,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook');
 
     Route::post('/input-data-logbook', [LogbookController::class, 'store'])->name('input-data-logbook');
-
+    Route::get('/edit-logbook/{id}/{nip}/{no_rm}', [LogbookController::class, 'indexEdit'])->name('edit-logbook');
     Route::post('/edit-data-logbook', [LogbookController::class, 'update'])->name('edit-data-logbook');
+    Route::delete('/delete-data-logbook/{id}/{nip}/{no_rm}', [LogbookController::class, 'destroy'])->name('delete-data-logbook');
 
     Route::get('/input-logbook-bk', function () {
         return view('logbook/input-logbook-bk');

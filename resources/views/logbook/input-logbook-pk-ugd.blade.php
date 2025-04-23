@@ -80,7 +80,7 @@ $v_logbook_pk_ugd_formatted = array_map(function ($item) {
 }, $v_logbook_pk_ugd);
 ?>
 
-    <form action="{{ route('input-logbook-pk-ugd') }}" method="POST">
+    <form action="{{ route('input-data-logbook') }}" method="POST">
         <div class="py-12">
             <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 lg:px-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6  ">
@@ -121,8 +121,8 @@ $v_logbook_pk_ugd_formatted = array_map(function ($item) {
                             </thead>
                             <tbody>
                                 @csrf
-                                <?php foreach ($v_logbook_pk-ugd_formatted as $index => $item): ?>
-                                <?php    $fitem = $f_logbook_pk-ugd[$index] ?? null; ?>
+                                <?php foreach ($v_logbook_pk_ugd_formatted as $index => $item): ?>
+                                <?php    $fitem = $f_logbook_pk_ugd[$index] ?? null; ?>
                                 <tr>
                                     <!-- Kolom Pertama: Nama Supervisi -->
                                     <td
@@ -160,7 +160,8 @@ $v_logbook_pk_ugd_formatted = array_map(function ($item) {
                                 {{ __('Batal') }}
                             </a>
                             <x-primary-button id="openModal"
-                                class="float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                                class="confirm-submit float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                                data-action="simpan">
                                 {{ __('Simpan') }}
                             </x-primary-button>
                         </div>
