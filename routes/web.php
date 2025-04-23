@@ -65,11 +65,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/input-logbook-pk-rawatjalan', function () {
         return view('logbook/input-logbook-pk-rawatjalan');
-    })->name('input-logbook-pk-ralan');
+    })->name('input-logbook-pk-rawatjalan');
 
     Route::get('/input-logbook-pk-rawatinap', function () {
         return view('logbook/input-logbook-pk-rawatinap');
-    })->name('input-logbook-pk-ranap');
+    })->name('input-logbook-pk-rawatinap');
 
     Route::get('/input-logbook-pk-perina', function () {
         return view('logbook/input-logbook-pk-perina');
