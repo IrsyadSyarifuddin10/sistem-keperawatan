@@ -26,8 +26,8 @@
                 $roleRoutes = [
                 'bk' => 'input-logbook-bk',
                 'pk-ugd' => 'input-logbook-pk-ugd',
-                'pk-rawat-jalan' => 'input-logbook-pk-ralan',
-                'pk-rawat-inap' => 'input-logbook-pk-ranap',
+                'pk-rawat-jalan' => 'input-logbook-pk-rawatjalan',
+                'pk-rawat-inap' => 'input-logbook-pk-rawatinap',
                 'pk-perina' => 'input-logbook-pk-perina',
                 'pk-ok' => 'input-logbook-pk-ok',
                 'pk-icu' => 'input-logbook-pk-icu',
