@@ -275,9 +275,14 @@ class LogbookController extends Controller
         // Cek apakah pasien sudah ada
         $pasien = Pasien::where('no_rm', $request->no_rm)->first();
 
-        if (!$pasien) {
+        if ($pasien) {
             // Jika belum ada, baru buat pasien
-            $pasien = Pasien::create([
+            if ($pasien->nama_pasien !== $request->nama_pasien) {
+                return redirect()->back()->with('error', 'No RM sudah ada, tetapi nama pasien berbeda.');
+            }
+        } else {
+            // Jika pasien tidak ada, buat data pasien baru
+            Pasien::create([
                 'no_rm' => $request->no_rm,
                 'nama_pasien' => $request->nama_pasien,
             ]);
@@ -314,7 +319,7 @@ class LogbookController extends Controller
 
         $indexLogbook = DB::table($table)
             ->leftJoin('pasien', "$table.no_rm", '=', 'pasien.no_rm')
-            ->leftJoin('users', "$table.validator", '=', 'users.nip')
+            ->leftJoin('users', "$table.nip", '=', 'users.nip')
             ->select([
                 "$table.id",
                 "$table.nip",
