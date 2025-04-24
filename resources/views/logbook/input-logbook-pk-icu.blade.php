@@ -115,8 +115,8 @@ $v_logbook_pk_icu_formatted = array_map(function ($item) {
                             </thead>
                             <tbody>
                                 @csrf
-                                <?php foreach ($v_logbook_pk-icu_formatted as $index => $item): ?>
-                                <?php    $fitem = $f_logbook_pk-icu[$index] ?? null; ?>
+                                <?php foreach ($v_logbook_pk_icu_formatted as $index => $item): ?>
+                                <?php    $fitem = $f_logbook_pk_icu[$index] ?? null; ?>
                                 <tr>
                                     <!-- Kolom Pertama: Nama Logbook -->
                                     <td

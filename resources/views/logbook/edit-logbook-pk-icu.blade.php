@@ -6,96 +6,107 @@
     </x-slot>
 
     <?php
-$f_logbook_pk_ok = [
-    'menerima_dan_mengerjakan_dokumentasi_pasien_tindakan_ok',
+$f_logbook_pk_icu = [
+    'assesment_resiko_jatuh',
+    'menerima_dan_mengerjakan_dokumentasi_pasien_baru_dewasa_dan_anak',
     'melakukan_sbar_dan_tbak',
+    'melakukan_pemasangan_infus_dewasa',
+    'melakukan_pemasangan_infus_anak_dan_neonatus',
+    'melakukan_pemasangan_ngt_ogt',
+    'melakukan_pemasangan_ventilator',
+    'observasi_pasien_dengan_intubasi',
+    'melakukan_personal_hygiene_pasien',
     'mengukur_pernafasan',
     'mengukur_tekanan_nadi',
     'mengukur_tekanan_darah',
     'mengukur_suhu_tubuh',
     'mengukur_saturasi_oksigen',
     'memberikan_oksigen_inhalasi_o2',
-    'assesment_resiko_jatuh',
+    'memberikan_oksigenasi_pemasangan_o2',
+    'melakukan_prosedur_tranfusi',
+    'melakukan_pasien_nebulizer',
+    'melakukan_balance_cairan',
     'melakukan_dan_mendokumentasikan_7_benar_obat',
     'memberikan_obat_per_oral_po',
     'memberikan_obat_intra_venous_iv',
     'memberikan_obat_intra_muskular_im',
     'memberikan_obat_intra_cutan_ic',
-    'memberikan_obat_sub_cutan_sc',
-    'pemasangan_catether',
-    'mempersiapkan_pasien_operasi',
-    'membantu_dokter_bedah_selama_operasi',
-    'melakukan_identifikasi_pasien_yang_akan_dioperasi',
-    'menyiapkan_alat_yang_dibutuhkan_saat_operasi_berlangsung',
-    'melakukan_pemasangan_sarung_meja_mayo_dengan_benar',
-    'melakukan_penyusunan_instrument_dasar_dimeja_mayo_dengan_benar',
-    'melakukan_teknik_aseptic_dan_antiseptic_daerah_operasi',
-    'melakukan_cuci_tangan_bedah',
-    'penghitungan_instrument_dan_peralatan_prosedur_pembedahan',
-    'melakukan_dokumentasi_sign_in_dan_sign_out',
-    'melakukan_observasi_pasien_post_operasi',
+    'memberikan_obat_supositori',
+    'memberikan_obat_vaginal',
+    'memberikan_obat_mata',
+    'memberikan_obat_sublingual',
+    'menghitung_tetesan_infus',
 ];
-$v_logbook_pk_ok = [
-    'menerima_dan_mengerjakan_dokumentasi_pasien_tindakan_ok',
+$v_logbook_pk_icu = [
+    'assesment_resiko_jatuh',
+    'menerima_dan_mengerjakan_dokumentasi_pasien_baru_dewasa_dan_anak',
     'melakukan_sbar_dan_tbak',
+    'melakukan_pemasangan_infus_dewasa',
+    'melakukan_pemasangan_infus_anak_dan_neonatus',
+    'melakukan_pemasangan_ngt_ogt',
+    'melakukan_pemasangan_ventilator',
+    'observasi_pasien_dengan_intubasi',
+    'melakukan_personal_hygiene_pasien',
     'mengukur_pernafasan',
     'mengukur_tekanan_nadi',
     'mengukur_tekanan_darah',
     'mengukur_suhu_tubuh',
     'mengukur_saturasi_oksigen',
     'memberikan_oksigen_inhalasi_o2',
-    'assesment_resiko_jatuh',
+    'memberikan_oksigenasi_pemasangan_o2',
+    'melakukan_prosedur_tranfusi',
+    'melakukan_pasien_nebulizer',
+    'melakukan_balance_cairan',
     'melakukan_dan_mendokumentasikan_7_benar_obat',
     'memberikan_obat_per_oral_po',
     'memberikan_obat_intra_venous_iv',
     'memberikan_obat_intra_muskular_im',
     'memberikan_obat_intra_cutan_ic',
-    'memberikan_obat_sub_cutan_sc',
-    'pemasangan_catether',
-    'mempersiapkan_pasien_operasi',
-    'membantu_dokter_bedah_selama_operasi',
-    'melakukan_identifikasi_pasien_yang_akan_dioperasi',
-    'menyiapkan_alat_yang_dibutuhkan_saat_operasi_berlangsung',
-    'melakukan_pemasangan_sarung_meja_mayo_dengan_benar',
-    'melakukan_penyusunan_instrument_dasar_dimeja_mayo_dengan_benar',
-    'melakukan_teknik_aseptic_dan_antiseptic_daerah_operasi',
-    'melakukan_cuci_tangan_bedah',
-    'penghitungan_instrument_dan_peralatan_prosedur_pembedahan',
-    'melakukan_dokumentasi_sign_in_dan_sign_out',
-    'melakukan_observasi_pasien_post_operasi'
+    'memberikan_obat_supositori',
+    'memberikan_obat_vaginal',
+    'memberikan_obat_mata',
+    'memberikan_obat_sublingual',
+    'menghitung_tetesan_infus'
 ];
 
-$v_logbook_pk_ok_formatted = array_map(function ($item) {
+$v_logbook_pk_icu_formatted = array_map(function ($item) {
     return ucwords(str_replace('_', ' ', $item));
-}, $v_logbook_pk_ok);
-?>
+}, $v_logbook_pk_icu);
+    ?>
 
-    <form action="{{ route('input-data-logbook') }}" method="POST">
+    <form action="{{ route('edit-data-logbook') }}" method="POST">
         <div class="py-12">
             <div class="max-w-7xl xl:max-w-[1920px] mx-auto px-2 lg:px-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6  ">
                     <div class="p-3 text-gray-900 block w-full overflow-x-auto">
                         <div class="p-3 text-2xl font-black">
-                            Input Logbook PK OK
+                            Ubah Logbook BK
                         </div>
                         <div class="p-3 flex flex-row">
                             <div class="mt-4 flex-1 mx-2">
                                 <x-input-label for="no_rm" :value="__('Masukkan Nomor Rekam Medis')" />
 
-                                <x-text-input id="no_rm" class="block mt-1 w-full" type="text" name="no_rm" />
+                                <x-text-input id="no_rm" class="block mt-1 w-full" type="text" name="no_rm"
+                                    value="{{ $indexEditLogbook->no_rm }}" />
 
                                 <x-input-error :messages="$errors->get('no_rm')" class="mt-2" />
                             </div>
                             <div class="mt-4 flex-1 mx-2">
                                 <x-input-label for="nama_pasien" :value="__('Masukkan Nama Pasien')" />
 
-                                <x-text-input id="nama_pasien" class="block mt-1 w-full" type="text"
-                                    name="nama_pasien" />
+                                <x-text-input id="nama_pasien" class="block mt-1 w-full" type="text" name="nama_pasien"
+                                    value="{{ $indexEditLogbook->nama_pasien }}" />
 
                                 <x-input-error :messages="$errors->get('nama_pasien')" class="mt-2" />
                             </div>
+                            <x-text-input id="id" class="block mt-1 w-full" type="hidden"
+                                value="{{ $indexEditLogbook->id }}" name="id" />
+                            <x-input-error :messages="$errors->get('id')" class="mt-2" />
+                            <x-text-input id="nip" class="block mt-1 w-full" type="hidden"
+                                value="{{ $indexEditLogbook->nip }}" name="nip" />
+                            <x-input-error :messages="$errors->get('nip')" class="mt-2" />
                         </div>
-                        <table id="tbLogbookPKOK" class="items-center bg-transparent w-full">
+                        <table id="tbLogbookBK" class="items-center bg-transparent w-full">
                             <thead
                                 class="text-gray-100 uppercase bg-gray-700 dark:bg-gray-700 dark:text-gray-100 text-xs">
                                 <tr>
@@ -111,10 +122,13 @@ $v_logbook_pk_ok_formatted = array_map(function ($item) {
                             </thead>
                             <tbody>
                                 @csrf
-                                <?php foreach ($v_logbook_pk_ok_formatted as $index => $item): ?>
-                                <?php    $fitem = $f_logbook_pk_ok[$index] ?? null; ?>
+                                <?php foreach ($v_logbook_pk_icu_formatted as $index => $item): ?>
+                                <?php
+                                    $fitem = $f_logbook_pk_icu[$index] ?? null;
+                                    $dataIndexEditLogbook = $indexEditLogbook->$fitem;
+                                ?>
                                 <tr>
-                                    <!-- Kolom Pertama: Nama Logbook -->
+                                    <!-- Kolom Pertama: Nama Supervisi -->
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-normal p-4 text-left text-blueGray-700">
                                         *
@@ -128,7 +142,9 @@ $v_logbook_pk_ok_formatted = array_map(function ($item) {
 
                                             <!-- Checkbox: jika dicentang, nilainya "sesuai" -->
                                             <input type="checkbox" value="sesuai" name="{{ $fitem }}" id="{{ $fitem }}"
-                                                class="sr-only peer">
+                                                class="sr-only peer" <?=($dataIndexEditLogbook==='sesuai' ) ? 'checked'
+                                                : '' ?>
+                                            >
 
                                             <div
                                                 class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
@@ -142,7 +158,7 @@ $v_logbook_pk_ok_formatted = array_map(function ($item) {
                         <div class="flex flex-row pt-4 px-6">
                             <x-input-label for="catatan" :value="__('Catatan')" />
                             <textarea name="catatan" class="form-control mx-2 w-full"
-                                rows="3">{{ $logbookPKOKData['catatan'] ?? '' }}</textarea>
+                                rows="3">{{ $indexEditLogbook->catatan ?? '' }}</textarea>
                         </div>
                         <div class="flex flex-row pt-10 justify-end">
                             <a href="{{ route('logbook') }}"
@@ -151,8 +167,8 @@ $v_logbook_pk_ok_formatted = array_map(function ($item) {
                             </a>
                             <x-primary-button id="openModal"
                                 class="confirm-submit float-right w-21 mx-2 px-4 py-3 my-0.5 focus:outline-none text-white font-black border-x-orange-900 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900 focus:ring-purple-300 rounded-lg text-sm dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-                                data-action="simpan">
-                                {{ __('Simpan') }}
+                                data-action="ubah">
+                                {{ __('Ubah') }}
                             </x-primary-button>
                         </div>
                     </div>

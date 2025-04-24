@@ -63,17 +63,17 @@ Route::middleware('auth')->group(function () {
         return view('logbook/input-logbook-pk-ugd');
     })->name('input-logbook-pk-ugd');
 
-    Route::get('/input-logbook-pk-rawatjalan', function () {
-        return view('logbook/input-logbook-pk-rawatjalan');
-    })->name('input-logbook-pk-rawatjalan');
+    Route::get('/input-logbook-pk-rawat-jalan', function () {
+        return view('logbook/input-logbook-pk-rawat-jalan');
+    })->name('input-logbook-pk-rawat-jalan');
 
-    Route::get('/input-logbook-pk-rawatinap', function () {
-        return view('logbook/input-logbook-pk-rawatinap');
-    })->name('input-logbook-pk-rawatinap');
+    Route::get('/input-logbook-pk-rawat-inap', function () {
+        return view('logbook/input-logbook-pk-rawat-inap');
+    })->name('input-logbook-pk-rawat-inap');
 
-    Route::get('/input-logbook-pk-perina', function () {
-        return view('logbook/input-logbook-pk-perina');
-    })->name('input-logbook-pk-perina');
+    Route::get('/input-logbook-pk-perinatologi', function () {
+        return view('logbook/input-logbook-pk-perinatologi');
+    })->name('input-logbook-pk-perinatologi');
 
     Route::get('/input-logbook-pk-ok', function () {
         return view('logbook/input-logbook-pk-ok');
