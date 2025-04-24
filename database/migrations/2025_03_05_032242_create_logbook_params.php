@@ -57,7 +57,7 @@ return new class extends Migration {
             $table->timestamp('updated_at')->nullable();
         });
 
-        Schema::create('logbook_pk_rawatinap', function (Blueprint $table) {
+        Schema::create('logbook_pk_rawat_inap', function (Blueprint $table) {
             $table->id()->primary();
             $table->string('no_rm', 6);
             $table->foreign('no_rm')->references('no_rm')->on('pasien');
@@ -103,7 +103,7 @@ return new class extends Migration {
             $table->timestamp('updated_at')->nullable();
         });
 
-        Schema::create('logbook_pk_rawatjalan', function (Blueprint $table) {
+        Schema::create('logbook_pk_rawat_jalan', function (Blueprint $table) {
             $table->id()->primary();
             $table->string('no_rm', 6);
             $table->foreign('no_rm')->references('no_rm')->on('pasien');
@@ -146,7 +146,7 @@ return new class extends Migration {
             $table->timestamp('updated_at')->nullable();
         });
 
-        Schema::create('logbook_pk_perina', function (Blueprint $table) {
+        Schema::create('logbook_pk_perinatologi', function (Blueprint $table) {
             $table->id()->primary();
             $table->string('no_rm', 6);
             $table->foreign('no_rm')->references('no_rm')->on('pasien');
@@ -324,9 +324,9 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('logbook_pk_ugd');
-        Schema::dropIfExists('logbook_pk_rawatinap');
-        Schema::dropIfExists('logbook_pk_rawatjalan');
-        Schema::dropIfExists('logbook_pk_perina');
+        Schema::dropIfExists('logbook_pk_rawat-inap');
+        Schema::dropIfExists('logbook_pk_rawat-jalan');
+        Schema::dropIfExists('logbook_pk_perinatologi');
         Schema::dropIfExists('logbook_pk_ok');
         Schema::dropIfExists('logbook_pk_icu');
         Schema::dropIfExists('logbook_bk');
