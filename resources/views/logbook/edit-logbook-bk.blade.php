@@ -141,13 +141,13 @@ $v_logbook_bk_formatted = array_map(function ($item) {
                                     <!-- Kolom Kedua: Toggle Button -->
                                     <td class="text-right px-6">
                                         <label class="inline-flex items-center cursor-pointer">
-                                            <!-- Hidden input untuk nilai default "tidak tercapai" -->
-                                            <input type="hidden" name="{{ $fitem }}" value="tidak tercapai">
+                                            <!-- Hidden input untuk nilai default "tidak sesuai" -->
+                                            <input type="hidden" name="{{ $fitem }}" value="tidak sesuai">
 
-                                            <!-- Checkbox: jika dicentang, nilainya "tercapai" -->
-                                            <input type="checkbox" value="tercapai" name="{{ $fitem }}"
-                                                id="{{ $fitem }}" class="sr-only peer"
-                                                <?=($dataIndexEditLogbook==='tercapai' ) ? 'checked' : '' ?>
+                                            <!-- Checkbox: jika dicentang, nilainya "sesuai" -->
+                                            <input type="checkbox" value="sesuai" name="{{ $fitem }}" id="{{ $fitem }}"
+                                                class="sr-only peer" <?=($dataIndexEditLogbook==='sesuai' ) ? 'checked'
+                                                : '' ?>
                                             >
 
                                             <div
@@ -160,9 +160,9 @@ $v_logbook_bk_formatted = array_map(function ($item) {
                             </tbody>
                         </table>
                         <div class="flex flex-row pt-4 px-6">
-                            <x-input-label for="catatan_logbook" :value="__('Catatan')" />
-                            <textarea name="catatan_logbook" class="form-control mx-2 w-full"
-                                rows="3">{{ $logbookBKData['catatan'] ?? '' }}</textarea>
+                            <x-input-label for="catatan" :value="__('Catatan')" />
+                            <textarea name="catatan" class="form-control mx-2 w-full"
+                                rows="3">{{ $indexEditLogbook->catatan ?? '' }}</textarea>
                         </div>
                         <div class="flex flex-row pt-10 justify-end">
                             <a href="{{ route('logbook') }}"
