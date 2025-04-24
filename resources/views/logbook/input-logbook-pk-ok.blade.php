@@ -114,7 +114,7 @@ $v_logbook_pk_ok_formatted = array_map(function ($item) {
                                 <?php foreach ($v_logbook_pk-ok_formatted as $index => $item): ?>
                                 <?php    $fitem = $f_logbook_pk-ok[$index] ?? null; ?>
                                 <tr>
-                                    <!-- Kolom Pertama: Nama Supervisi -->
+                                    <!-- Kolom Pertama: Nama Logbook -->
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-normal p-4 text-left text-blueGray-700">
                                         *
@@ -123,10 +123,10 @@ $v_logbook_pk_ok_formatted = array_map(function ($item) {
                                     <!-- Kolom Kedua: Toggle Button -->
                                     <td class="text-right px-6">
                                         <label class="inline-flex items-center cursor-pointer">
-                                            <!-- Hidden input untuk nilai default "tidak tercapai" -->
+                                            <!-- Hidden input untuk nilai default "tidak sesuai" -->
                                             <input type="hidden" name="{{ $fitem }}" value="tidak sesuai">
 
-                                            <!-- Checkbox: jika dicentang, nilainya "tercapai" -->
+                                            <!-- Checkbox: jika dicentang, nilainya "sesuai" -->
                                             <input type="checkbox" value="sesuai" name="{{ $fitem }}" id="{{ $fitem }}"
                                                 class="sr-only peer">
 
@@ -140,8 +140,8 @@ $v_logbook_pk_ok_formatted = array_map(function ($item) {
                             </tbody>
                         </table>
                         <div class="flex flex-row pt-4 px-6">
-                            <x-input-label for="catatan_logbook" :value="__('Catatan')" />
-                            <textarea name="catatan_logbook" class="form-control mx-2 w-full"
+                            <x-input-label for="catatan" :value="__('Catatan')" />
+                            <textarea name="catatan" class="form-control mx-2 w-full"
                                 rows="3">{{ $logbookPKOKData['catatan'] ?? '' }}</textarea>
                         </div>
                         <div class="flex flex-row pt-10 justify-end">
