@@ -11,7 +11,7 @@ class LogbookPKPerina extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    protected $table = 'logbook_pk_perina';
+    protected $table = 'logbook_pk_perinatologi';
 
     /**
      * The attributes that are mass assignable.
