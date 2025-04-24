@@ -161,7 +161,7 @@ class LogbookController extends Controller
             'catatan',
             'nip',
         ]],
-        'pk-perina' => [LogbookPKPerina::class, [
+        'pk-perinatologi' => [LogbookPKPerina::class, [
             'no_rm',
             'melakukan_resusitasi_bayi_baru_lahir',
             'memasang_gelang_pasien_baru',
@@ -302,9 +302,9 @@ class LogbookController extends Controller
         $tableMap = [
             'bk' => 'logbook_bk',
             'pk-ugd' => 'logbook_pk_ugd',
-            'pk-rawat-jalan' => 'logbook_pk_rawatjalan',
-            'pk-rawat-inap' => 'logbook_pk_rawatinap',
-            'pk-perina' => 'logbook_pk_perina',
+            'pk-rawat-jalan' => 'logbook_pk_rawat_jalan',
+            'pk-rawat-inap' => 'logbook_pk_rawat_inap',
+            'pk-perinatologi' => 'logbook_pk_perinatologi',
             'pk-ok' => 'logbook_pk_ok',
             'pk-icu' => 'logbook_pk_icu',
         ];
@@ -343,9 +343,9 @@ class LogbookController extends Controller
         $tableMap = [
             'bk' => 'logbook_bk',
             'pk-ugd' => 'logbook_pk_ugd',
-            'pk-rawat-jalan' => 'logbook_pk_rawatjalan',
-            'pk-rawat-inap' => 'logbook_pk_rawatinap',
-            'pk-perina' => 'logbook_pk_perina',
+            'pk-rawat-jalan' => 'logbook_pk_rawat_jalan',
+            'pk-rawat-inap' => 'logbook_pk_rawat_inap',
+            'pk-perinatologi' => 'logbook_pk_perinatologi',
             'pk-ok' => 'logbook_pk_ok',
             'pk-icu' => 'logbook_pk_icu',
         ];
@@ -387,9 +387,9 @@ class LogbookController extends Controller
         $tableMap = [
             'bk' => 'logbook_bk',
             'pk-ugd' => 'logbook_pk_ugd',
-            'pk-rawat-jalan' => 'logbook_pk_rawatjalan',
-            'pk-rawat-inap' => 'logbook_pk_rawatinap',
-            'pk-perina' => 'logbook_pk_perina',
+            'pk-rawat-jalan' => 'logbook_pk_rawat_jalan',
+            'pk-rawat-inap' => 'logbook_pk_rawat_inap',
+            'pk-perinatologi' => 'logbook_pk_perinatologi',
             'pk-ok' => 'logbook_pk_ok',
             'pk-icu' => 'logbook_pk_icu',
         ];
