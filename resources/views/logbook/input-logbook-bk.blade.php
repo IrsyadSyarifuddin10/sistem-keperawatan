@@ -148,8 +148,8 @@ $v_logbook_bk_formatted = array_map(function ($item) {
                             </tbody>
                         </table>
                         <div class="flex flex-row pt-4 px-6">
-                            <x-input-label for="catatan_logbook" :value="__('Catatan')" />
-                            <textarea name="catatan_logbook" class="form-control mx-2 w-full"
+                            <x-input-label for="catatan" :value="__('Catatan')" />
+                            <textarea name="catatan" class="form-control mx-2 w-full"
                                 rows="3">{{ $logbookBKData['catatan'] ?? '' }}</textarea>
                         </div>
                         <div class="flex flex-row pt-10 justify-end">
