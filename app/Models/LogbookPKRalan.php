@@ -11,7 +11,7 @@ class LogbookPKRalan extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    protected $table = 'logbook_pk_rawatjalan';
+    protected $table = 'logbook_pk_rawat_jalan';
 
     /**
      * The attributes that are mass assignable.
