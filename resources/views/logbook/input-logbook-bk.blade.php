@@ -122,7 +122,7 @@ $v_logbook_bk_formatted = array_map(function ($item) {
                                 <?php foreach ($v_logbook_bk_formatted as $index => $item): ?>
                                 <?php    $fitem = $f_logbook_bk[$index] ?? null; ?>
                                 <tr>
-                                    <!-- Kolom Pertama: Nama Supervisi -->
+                                    <!-- Kolom Pertama: Nama Logbook -->
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-normal p-4 text-left text-blueGray-700">
                                         *
@@ -131,10 +131,10 @@ $v_logbook_bk_formatted = array_map(function ($item) {
                                     <!-- Kolom Kedua: Toggle Button -->
                                     <td class="text-right px-6">
                                         <label class="inline-flex items-center cursor-pointer">
-                                            <!-- Hidden input untuk nilai default "tidak tercapai" -->
+                                            <!-- Hidden input untuk nilai default "tidak sesuai" -->
                                             <input type="hidden" name="{{ $fitem }}" value="tidak sesuai">
 
-                                            <!-- Checkbox: jika dicentang, nilainya "tercapai" -->
+                                            <!-- Checkbox: jika dicentang, nilainya "sesuai" -->
                                             <input type="checkbox" value="sesuai" name="{{ $fitem }}" id="{{ $fitem }}"
                                                 class="sr-only peer">
 
