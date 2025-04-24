@@ -406,4 +406,46 @@ class LogbookController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('logbook')->with('success', 'Data berhasil dihapus!');
     }
+
+    public function update(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+        $role = $user->role;
+
+        if (!isset($this->logbookMap[$role])) {
+            abort(403, 'Unauthorized role');
+        }
+
+        [$model, $fields] = $this->logbookMap[$role];
+
+        $data = $request->only($fields);
+        $data['nip'] = $user->nip;
+
+        // Cek apakah pasien sudah ada
+        $pasien = Pasien::where('no_rm', $request->no_rm)->first();
+
+        if ($pasien) {
+            // Jika belum ada, baru buat pasien
+            if ($pasien->nama_pasien !== $request->nama_pasien) {
+                return redirect()->back()->with('error', 'No RM sudah ada, tetapi nama pasien berbeda.');
+            }
+        } else {
+            // Jika pasien tidak ada, buat data pasien baru
+            Pasien::create([
+                'no_rm' => $request->no_rm,
+                'nama_pasien' => $request->nama_pasien,
+            ]);
+        }
+
+        $logbook = $model::find($request->id);
+
+        if (!$logbook) {
+            return redirect()->back()->with('error', 'Data logbook tidak ditemukan.');
+        }
+
+        // Simpan data logbook
+        $logbook = $logbook->update($data);
+
+        return redirect()->route('logbook')->with('success', 'Logbook berhasil diubah.');
+    }
 }
