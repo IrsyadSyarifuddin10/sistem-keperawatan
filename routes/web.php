@@ -27,9 +27,9 @@ Route::middleware('auth')->group(function () {
         return view('petugas/input-petugas');
     })->name('input-petugas');
     Route::post('/input-data-petugas', [PetugasController::class, 'store'])->name('input-data-petugas');
-    Route::get('/edit-petugas/{id}/{nip}/{nama_petugas}', [PetugasController::class, 'indexEdit'])->name('edit-petugas');
+    Route::get('/edit-petugas/{id}/{nip}/{unit}/{status}/{role}', [PetugasController::class, 'indexEdit'])->name('edit-petugas');
     Route::post('/edit-data-petugas', [PetugasController::class, 'update'])->name('edit-data-petugas');
-    Route::delete('/delete-data-petugas/{id}/{nip}/{nama_petugas}', [PetugasController::class, 'destroy'])->name('delete-data-petugas');
+    Route::delete('/delete-data-petugas/{id}/{nip}/{unit}/{status}/{role}', [PetugasController::class, 'destroy'])->name('delete-data-petugas');
 
     // Pasien
     Route::get('/pasien', [PasienController::class, 'index'])->name('pasien');
