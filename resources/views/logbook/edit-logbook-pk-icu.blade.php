@@ -80,7 +80,7 @@ $v_logbook_pk_icu_formatted = array_map(function ($item) {
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg pt-6 px-6  ">
                     <div class="p-3 text-gray-900 block w-full overflow-x-auto">
                         <div class="p-3 text-2xl font-black">
-                            Ubah Logbook BK
+                            Ubah Logbook ICU
                         </div>
                         <div class="p-3 flex flex-row">
                             <div class="mt-4 flex-1 mx-2">
