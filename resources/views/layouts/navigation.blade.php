@@ -23,6 +23,14 @@
                     <x-nav-link :href="route('logbook')" :active="request()->routeIs('logbook', 'input-logbook-pk')">
                         {{ __('Logbook') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('pasien')" :active="request()->routeIs('pasien', 'data-pasien')">
+                        {{ __('Data Pasien') }}
+                    </x-nav-link>
+                    @if (Auth::user()->role === 'admin' || Auth::user()->role === 'bk')
+                    <x-nav-link :href="route('petugas')" :active="request()->routeIs('petugas', 'data-petugas')">
+                        {{ __('Data Petugas') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
