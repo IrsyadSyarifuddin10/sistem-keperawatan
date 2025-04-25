@@ -331,7 +331,7 @@ class LogbookController extends Controller
                 "$table.status_validasi",
                 "$table.waktu_validasi",
             ])
-            ->paginate(5);
+            ->paginate(10);
 
         return view('logbook.logbook', compact('indexLogbook'));
     }
