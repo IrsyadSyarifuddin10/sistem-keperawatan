@@ -29,7 +29,7 @@
                 title: 'Oops!',
                 text: '{{ session('error') }}',
                 timer: 3000,
-                showConfirmButton: false
+                showConfirmButton: true
             });
 </script>
 @endif
@@ -41,18 +41,6 @@
             icon: 'success',
             title: 'Berhasil!',
             text: '{{ session('success') }}',
-            timer: 3000,
-            showConfirmButton: false
-        });
-</script>
-@endif
-
-@if (session('error'))
-<script>
-    Swal.fire({
-            icon: 'error',
-            title: 'Oops!',
-            text: '{{ session('error') }}',
             timer: 3000,
             showConfirmButton: false
         });
