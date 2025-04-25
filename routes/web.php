@@ -5,6 +5,8 @@ use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MentoringController;
 use App\Http\Controllers\SupervisiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PetugasController;
 use App\Models\LogbookBK;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +22,17 @@ Route::middleware('auth')->group(function () {
 
     // Users
     Route::get('/get-user-name', [UserController::class, 'getUserName']);
+    Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas');
+    Route::get('/input-petugas', function () {
+        return view('petugas/input-petugas');
+    })->name('input-petugas');
+    Route::post('/input-data-petugas', [PetugasController::class, 'store'])->name('input-data-petugas');
+    Route::get('/edit-petugas/{id}/{nip}/{nama_petugas}', [PetugasController::class, 'indexEdit'])->name('edit-petugas');
+    Route::post('/edit-data-petugas', [PetugasController::class, 'update'])->name('edit-data-petugas');
+    Route::delete('/delete-data-petugas/{id}/{nip}/{nama_petugas}', [PetugasController::class, 'destroy'])->name('delete-data-petugas');
+
+    // Pasien
+    Route::get('/pasien', [PasienController::class, 'index'])->name('pasien');
 
     // Dashboard
     Route::get('/dashboard', function () {
