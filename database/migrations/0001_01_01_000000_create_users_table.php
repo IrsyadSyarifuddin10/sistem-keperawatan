@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('password');
             $table->enum('status', ['admin', 'bk', 'pk', 'pra'])->default('admin');
             $table->enum('unit', ['admin', 'ugd', 'rawat inap', 'rawat jalan', 'perinatologi', 'ok', 'icu', 'bk'])->default('admin');
-            $table->string('role')->nullable();
+            $table->enum('role', ['bk', 'pk-ugd', 'pk-rawat-inap', 'pk-rawat-jalan', 'pk-perinatologi', 'pk-ok', 'pk-icu', 'admin'])->default('admin');
             $table->rememberToken();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
