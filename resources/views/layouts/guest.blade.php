@@ -24,12 +24,7 @@
 
         <div class="w-full sm:max-w-md my-2 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             {{ $slot }}
-        </div>
-
-        <div>
-
-            <img src="{{ asset('images/logo-ittim.png') }}" class="block h-16 w-auto" alt="Team IT">
-
+            <img src="{{ asset('images/logo-ittim.png') }}" class="block h-16 w-auto mx-auto mt-6" alt="Team IT">
         </div>
     </div>
 </body>
