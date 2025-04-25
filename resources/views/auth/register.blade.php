@@ -69,9 +69,15 @@
                 const roleInput = document.getElementById("role");
 
                 function updateRole() {
-                    const statusValue = statusDropdown.value;
-                    const unitValue = unitDropdown.value.replace(/\s+/g, '-').toLowerCase(); // Mengubah spasi menjadi "-"
-                    roleInput.value = `${statusValue}-${unitValue}`;
+                const statusValue = statusDropdown.value;
+                const unitValue = unitDropdown.value.replace(/\s+/g, '-').toLowerCase(); // Mengubah spasi menjadi "-"
+                
+                // Jika nilai status dan unit sama, hanya gunakan salah satu
+                if (statusValue === unitValue) {
+                        roleInput.value = statusValue;
+                    } else {
+                        roleInput.value = `${statusValue}-${unitValue}`;
+                    }
                 }
 
                 // Event listener saat dropdown berubah
