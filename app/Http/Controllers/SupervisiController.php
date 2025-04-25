@@ -23,7 +23,7 @@ class SupervisiController extends Controller
             ->leftJoin('users as nipUsers', 'supervisi.nip', '=', 'nipUsers.nip')
             ->leftJoin('users as supervisorUsers', 'supervisi.supervisor', '=', 'supervisorUsers.nip')
             ->select(['supervisi.created_at', 'supervisi.id', 'nipUsers.nip as nip', 'nipUsers.nama_petugas as nama_petugas', 'supervisorUsers.nip as nipSupervisor', 'supervisorUsers.nama_petugas as supervisor', 'supervisi.status_verifikasi'])
-            ->paginate(5);
+            ->paginate(10);
 
         return view('supervisi.supervisi', compact('indexSupervisi')); // Kirim data ke view
     }

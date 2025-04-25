@@ -26,7 +26,7 @@ class MentoringController extends Controller
             ->leftJoin('users as nipUsers', 'mentoring.nip', '=', 'nipUsers.nip')
             ->leftJoin('users as mentorUsers', 'mentoring.mentor', '=', 'mentorUsers.nip')
             ->select(['mentoring.created_at', 'mentoring.id', 'nipUsers.nip as nip', 'nipUsers.nama_petugas as nama_petugas', 'mentorUsers.nip as nipMentor', 'mentorUsers.nama_petugas as mentor', 'mentoring.status_verifikasi'])
-            ->paginate(5);
+            ->paginate(10);
 
         return view('mentoring.mentoring', compact('indexMentoring')); // Kirim data ke view
     }
