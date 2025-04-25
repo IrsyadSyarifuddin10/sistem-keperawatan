@@ -48,7 +48,7 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody class="max-h-[400px] overflow-y-auto">
                         @foreach ($indexMentoring as $mentoringIndex)
                         <tr
                             class="border-b align-middle text-black dark:border-gray-700 odd:bg-white odd:dark:bg-white even:bg-gray-100 even:dark:bg-gray-100">
