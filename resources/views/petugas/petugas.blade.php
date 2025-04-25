@@ -54,19 +54,47 @@
                         </tr>
                     </thead>
                     <tbody class="max-h-[400px] overflow-y-auto">
-                        @for ($i = 0; $i < 100; $i++) <tr
+                        @foreach ($indexPetugas as $petugasIndex)
+                        <tr
                             class="border-b dark:border-gray-700 text-black odd:bg-white odd:dark:bg-white even:bg-gray-100 even:dark:bg-gray-100">
-                            <td class="px-4">123456{{ $i }}</td>
-                            <td class="px-4">Nama Petugas {{ $i }}</td>
-                            <td class="px-4">email{{ $i }}@example.com</td>
-                            <td class="px-4">Unit {{ $i }}</td>
-                            <td class="px-4">Status {{ $i }}</td>
-                            <td class="px-4">Role {{ $i }}</td>
+                            <td class="px-4">{{ $petugasIndex->nip }}</td>
+                            <td class="px-4">{{ $petugasIndex->nama_petugas }}</td>
+                            <td class="px-4">{{ $petugasIndex->email }}</td>
+                            <td class="px-4">{{ $petugasIndex->unit }}</td>
+                            <td class="px-4">{{ $petugasIndex->status }}</td>
+                            <td class="px-4">{{ $petugasIndex->role }}</td>
                             <td class="px-4 pt-2 flex justify-end items-center gap-2">
                                 <!-- Tombol Edit dan Delete -->
+                                <!-- Form untuk Edit -->
+                                <form
+                                    action="{{ route('edit-petugas', ['id' => $petugasIndex->id,'nip'=>$petugasIndex->nip,'unit'=>$petugasIndex->unit,'status'=>$petugasIndex->status,'role'=>$petugasIndex->role ]) }}"
+                                    method="GET">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $petugasIndex->id }}" />
+                                    <input type="hidden" name="nip" value="{{ $petugasIndex->nip }}" />
+                                    <input type="hidden" name="unit" value="{{ $petugasIndex->unit }}" />
+                                    <input type="hidden" name="status" value="{{ $petugasIndex->status }}" />
+                                    <input type="hidden" name="role" value="{{ $petugasIndex->role }}" />
+                                    <button id="btnUbahPetugas" type="submit"
+                                        class="rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </button>
+                                </form>
+
+                                <form
+                                    action="{{ route('delete-data-petugas', ['id' => $petugasIndex->id,'nip'=>$petugasIndex->nip,'unit'=>$petugasIndex->unit,'status'=>$petugasIndex->status,'role'=>$petugasIndex->role]) }}"
+                                    method="POST" class="form-hapus-petugas">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button"
+                                        class="confirm-submit rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black"
+                                        data-action="hapus">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </button>
+                                </form>
                             </td>
-                            </tr>
-                            @endfor
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
