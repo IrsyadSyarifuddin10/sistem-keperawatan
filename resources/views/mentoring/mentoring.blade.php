@@ -50,14 +50,15 @@
 
                     <tbody>
                         @foreach ($indexMentoring as $mentoringIndex)
-                        <tr class="border-b align-middle text-black dark:border-gray-700">
-                            <td class="px-4 py-3">
+                        <tr
+                            class="border-b align-middle text-black dark:border-gray-700 odd:bg-white odd:dark:bg-white even:bg-gray-100 even:dark:bg-gray-100">
+                            <td class="px-4">
                                 {{ \Carbon\Carbon::parse($mentoringIndex->created_at)->format('d-m-Y H:i') }}
                             </td>
-                            <td class="px-4 py-3">{{ $mentoringIndex->nama_petugas }}</td>
-                            <td class="px-4 py-3">{{ $mentoringIndex->mentor }}</td>
-                            <td class="px-4 py-3">{{ $mentoringIndex->status_verifikasi }}</td>
-                            <td class="flex flex-row justify-end gap-2 px-4 py-3 text-right">
+                            <td class="px-4">{{ $mentoringIndex->nama_petugas }}</td>
+                            <td class="px-4">{{ $mentoringIndex->mentor }}</td>
+                            <td class="px-4">{{ $mentoringIndex->status_verifikasi }}</td>
+                            <td class="px-4 pt-2 flex justify-end items-center gap-2">
                                 <!-- Form untuk Edit -->
                                 <form
                                     action="{{ route('edit-mentoring', ['id' => $mentoringIndex->id,'nip'=>$mentoringIndex->nip,'nipMentor'=>$mentoringIndex->nipMentor ]) }}"
@@ -67,7 +68,7 @@
                                     <input type="hidden" name="nip" value="{{ $mentoringIndex->nip }}" />
                                     <input type="hidden" name="nipMentor" value="{{ $mentoringIndex->nipMentor }}" />
                                     <button id="btnUbahMentoring" type="submit"
-                                        class="mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
+                                        class="rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black">
                                         <i class="bi bi-pencil-fill"></i>
                                     </button>
                                 </form>
@@ -78,7 +79,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="button"
-                                        class="confirm-submit mt-3 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black"
+                                        class="confirm-submit rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-black hover:bg-purple-100 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-black"
                                         data-action="hapus">
                                         <i class="bi bi-trash3-fill"></i>
                                     </button>
