@@ -88,7 +88,7 @@
                 </table>
                 <!-- Pagination -->
                 <div class="mt-4">
-                    {{ $indexSupervisi->links() }}
+                    {{ $indexPasien->links() }}
                 </div>
             </div>
         </div>

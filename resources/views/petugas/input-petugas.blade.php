@@ -4,7 +4,7 @@
             <x-slot name="header">
                 <h2 class="text-xl leading-tight font-semibold text-gray-800">{{ __('Tambah Petugas') }}</h2>
             </x-slot>
-            <form method="POST" action="{{ route('input-data-petugas') }}">
+            <form method="POST" action="{{ route('input-data-petugas') }}" class="mt-6">
                 @csrf
 
                 <!-- NIP -->

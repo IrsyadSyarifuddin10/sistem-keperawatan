@@ -97,6 +97,10 @@
                         @endforeach
                     </tbody>
                 </table>
+                <!-- Pagination -->
+                <div class="mt-4">
+                    {{ $indexPetugas->links() }}
+                </div>
             </div>
         </div>
     </div>

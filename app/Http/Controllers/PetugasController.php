@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rules;
 
 
@@ -20,7 +19,7 @@ class PetugasController extends Controller
     {
         $indexPetugas = DB::table('users')
             ->select(['id', 'nip', 'nama_petugas', 'email', 'unit', 'status', 'role'])
-            ->get();
+            ->paginate(10);
 
         return view('petugas.petugas', compact('indexPetugas')); // Kirim data ke view
     }

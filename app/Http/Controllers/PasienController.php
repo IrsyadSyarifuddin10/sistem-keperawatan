@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class PasienController extends Controller
 {
@@ -11,7 +16,11 @@ class PasienController extends Controller
      */
     public function index()
     {
-        //
+        $indexPetugas = DB::table('users')
+            ->select(['id', 'nip', 'nama_petugas', 'email', 'unit', 'status', 'role'])
+            ->paginate(10);
+
+        return view('petugas.petugas', compact('indexPetugas')); // Kirim data ke view
     }
 
     /**
