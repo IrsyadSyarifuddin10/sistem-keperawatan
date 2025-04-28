@@ -19,6 +19,8 @@ class PetugasController extends Controller
     {
         $indexPetugas = DB::table('users')
             ->select(['id', 'nip', 'nama_petugas', 'email', 'unit', 'status', 'role'])
+            ->where('status', "!=", 'admin')
+            ->where('role', "!=", 'admin')
             ->paginate(10);
 
         return view('petugas.petugas', compact('indexPetugas')); // Kirim data ke view
