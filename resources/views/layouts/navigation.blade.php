@@ -5,30 +5,42 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 gap-3 flex items-center">
+                    Development
                     <img src="{{ asset('images/logo-rs.png') }}" class="block h-9 w-auto" alt="RSIAPB">
                     <img src="{{ asset('images/logo-ittim.png') }}" class="block h-9 w-auto" alt="Team IT">
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard', 'input-dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('V') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('mentoring')" :active="request()->routeIs('mentoring', 'input-mentoring')">
+                    <x-nav-link :href="route('mentoring')"
+                        :active="request()->routeIs('mentoring', 'input-mentoring','edit-mentoring')">
                         {{ __('Mentoring') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('supervisi')" :active="request()->routeIs('supervisi', 'input-supervisi')">
+                    <x-nav-link :href="route('supervisi')"
+                        :active="request()->routeIs('supervisi', 'input-supervisi', 'edit-supervisi')">
                         {{ __('Supervisi') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('logbook')" :active="request()->routeIs('logbook', 'input-logbook-pk')">
+                    <x-nav-link :href="route('logbook')" :active="request()->routeIs(
+                            'logbook', 
+                            'input-logbook-bk',
+                            'input-logbook-pk-icu',
+                            'input-logbook-pk-ok',
+                            'input-logbook-pk-perinatologi',
+                            'input-logbook-pk-rawat-inap',
+                            'input-logbook-pk-rawat-jalan',
+                            'input-logbook-pk-ugd',
+                            )">
                         {{ __('Logbook') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('pasien')" :active="request()->routeIs('pasien', 'data-pasien')">
-                        {{ __('Data Pasien') }}
-                    </x-nav-link>
-                    @if (Auth::user()->role === 'admin' || Auth::user()->role === 'bk')
+                    @if (Auth::user()->role === 'admin' || Auth::user()->role === 'verifikator')
                     <x-nav-link :href="route('petugas')" :active="request()->routeIs('petugas', 'data-petugas')">
                         {{ __('Data Petugas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('verifikasi')" :active="request()->routeIs('verifikasi', 'data-pasien')">
+                        {{ __('Verifikasi Logbook') }}
                     </x-nav-link>
                     @endif
                 </div>
