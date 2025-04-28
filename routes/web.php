@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MentoringController;
 use App\Http\Controllers\SupervisiController;
+use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PetugasController;
