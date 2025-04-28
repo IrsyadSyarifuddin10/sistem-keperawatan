@@ -39,9 +39,6 @@
                     <x-nav-link :href="route('petugas')" :active="request()->routeIs('petugas', 'data-petugas')">
                         {{ __('Data Petugas') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('verifikasi')" :active="request()->routeIs('verifikasi', 'data-pasien')">
-                        {{ __('Verifikasi Logbook') }}
-                    </x-nav-link>
                     @endif
                 </div>
             </div>
