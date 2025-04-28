@@ -311,6 +311,46 @@ class LogbookController extends Controller
 
         $role = $user->role;
 
+        if ($role === 'verifikator') {
+            $indexLogbook = collect();
+
+            foreach ($tableMap as $table) {
+                $data = DB::table($table)
+                    ->leftJoin('pasien', "$table.no_rm", '=', 'pasien.no_rm')
+                    ->leftJoin('users', "$table.nip", '=', 'users.nip')
+                    ->select([
+                        "$table.id",
+                        "$table.nip",
+                        "$table.no_rm",
+                        "$table.created_at",
+                        "$table.no_rm",
+                        'pasien.nama_pasien',
+                        'users.nama_petugas',
+                        "$table.status_validasi",
+                        "$table.waktu_validasi",
+                        'users.role as role_petugas',
+                    ]);
+
+                $indexLogbook = $indexLogbook->concat($data->get());
+            }
+
+            dd($indexLogbook);
+
+            // Paginate the combined collection
+            $indexLogbook = $indexLogbook->sortByDesc('created_at')->values();
+            $perPage = 10;
+            $page = $request->input('page', 1);
+            $paginatedLogbook = new \Illuminate\Pagination\LengthAwarePaginator(
+                $indexLogbook->forPage($page, $perPage),
+                $indexLogbook->count(),
+                $perPage,
+                $page,
+                ['path' => $request->url(), 'query' => $request->query()]
+            );
+
+            return view('logbook.logbook', compact('indexLogbook'));
+        }
+
         if (!isset($tableMap[$role])) {
             abort(403, 'Unauthorized role.');
         }
