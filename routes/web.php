@@ -33,6 +33,13 @@ Route::middleware('auth')->group(function () {
 
     // Pasien
     Route::get('/pasien', [PasienController::class, 'index'])->name('pasien');
+    Route::get('/input-pasien', function () {
+        return view('pasien/input-pasien');
+    })->name('input-pasien');
+    Route::post('/input-data-pasien', [PasienController::class, 'store'])->name('input-data-pasien');
+    Route::get('/edit-pasien/{id}/{no_rm}/{nama_pasien}', [PasienController::class, 'indexEdit'])->name('edit-pasien');
+    Route::post('/edit-data-pasien', [PasienController::class, 'update'])->name('edit-data-pasien');
+    Route::delete('/delete-data-pasien/{id}/{no_rm}/{nama_pasien}', [PasienController::class, 'destroy'])->name('delete-data-pasien');
 
     // Dashboard
     Route::get('/dashboard', function () {
