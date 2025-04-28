@@ -83,7 +83,7 @@ class UserSeeder extends Seeder
             'unit' => 'admin',
             'status' => 'admin',
             'role' => 'admin',
-            'email' => 'admin',
+            'email' => 'admin@sikep.com',
             'password' => Hash::make('666'), // Password default untuk admin
             'created_at' => now(),
         ]);
@@ -96,17 +96,19 @@ class UserSeeder extends Seeder
             // Atur role berdasarkan kondisi
             if ($user['status'] === 'bk') {
                 $user['role'] = $user['status'];
+            } elseif ($user['status'] === 'verifikator') {
+                $user['role'] = $user['status'];
             } elseif ($user['status'] === 'pra pk') {
-                $user['role'] = str_replace(' ', '-', $user['status']) . '-' . $user['unit'];
+                $user['role'] = str_replace(' ', '-', $user['status']) . '-' . str_replace(' ', '-', $user['unit']);
             } else {
-                $user['role'] = $user['status'] . '-' . $user['unit'];
+                $user['role'] = $user['status'] . '-' . str_replace(' ', '-', $user['unit']);
             }
 
             // Pastikan role juga dalam lowercase
             $user['role'] = strtolower($user['role']);
 
             // Buat email dan password
-            $user['email'] = strtolower(str_replace([' ', ','], ['.', ''], $user['nama_petugas'])) . '@sikep.com';
+            $user['email'] = strtolower(str_replace([' ', ','], ['.', ''], explode(',', $user['nama_petugas'])[0])) . '@sikep.com';
             $user['password'] = Hash::make('123');
             $user['created_at'] = now();
         }
