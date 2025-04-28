@@ -75,16 +75,17 @@
                     </thead>
                     <tbody>
                         @foreach ($indexLogbook as $logbookIndex)
-                        <tr class="border-b align-middle text-black dark:border-gray-700">
+                        <tr
+                            class="border-b align-middle text-black dark:border-gray-700 odd:bg-white odd:dark:bg-white even:bg-gray-100 even:dark:bg-gray-100">
                             <td class="px-4 py-3">
                                 {{ \Carbon\Carbon::parse($logbookIndex->created_at)->format('d-m-Y H:i') }}
                             </td>
-                            <td class="px-4 py-3">{{ $logbookIndex->no_rm }}</td>
-                            <td class="px-4 py-3">{{ $logbookIndex->nama_pasien }}</td>
-                            <td class="px-4 py-3">{{ $logbookIndex->nama_petugas }}</td>
-                            <td class="px-4 py-3">{{ $logbookIndex->status_validasi }}</td>
-                            <td class="px-4 py-3">{{ $logbookIndex->waktu_validasi }}</td>
-                            <td class="flex flex-row justify-end gap-2 px-4 py-3 text-right">
+                            <td class="px-4">{{ $logbookIndex->no_rm }}</td>
+                            <td class="px-4">{{ $logbookIndex->nama_pasien }}</td>
+                            <td class="px-4">{{ $logbookIndex->nama_petugas }}</td>
+                            <td class="px-4">{{ $logbookIndex->status_validasi }}</td>
+                            <td class="px-4">{{ $logbookIndex->waktu_validasi }}</td>
+                            <td class="flex flex-row justify-end gap-2 px-4 text-right">
                                 <!-- Form untuk Edit -->
                                 <form
                                     action="{{ route('edit-logbook', ['id' => $logbookIndex->id,'nip'=>$logbookIndex->nip,'no_rm'=>$logbookIndex->no_rm ]) }}"
