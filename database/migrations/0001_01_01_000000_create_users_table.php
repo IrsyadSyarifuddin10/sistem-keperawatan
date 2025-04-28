@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('status', ['admin', 'bk', 'pk', 'pra pk'])->default('admin');
-            $table->enum('unit', ['admin', 'ugd', 'rawat inap', 'rawat jalan', 'perinatologi', 'ok', 'icu', 'bk', 'vk'])->default('admin');
+            $table->enum('status', ['admin', 'bk', 'pk', 'pra pk', 'verifikator'])->default('admin');
+            $table->enum('unit', ['admin', 'ugd', 'rawat inap', 'rawat jalan', 'perinatologi', 'ok', 'icu', 'bk', 'vk', 'kepegawaian'])->default('admin');
             $table->enum('role', [
                 'bk',
                 'pk-ugd',
@@ -28,6 +28,7 @@ return new class extends Migration {
                 'pk-ok',
                 'pk-icu',
                 'pk-vk',
+                'pk-kepegawaian',
                 'admin',
                 'pra-pk-ugd',
                 'pra-pk-rawat-inap',
@@ -36,6 +37,8 @@ return new class extends Migration {
                 'pra-pk-ok',
                 'pra-pk-icu',
                 'pra-pk-vk',
+                'pra-pk-kepegawaian',
+                'verifikator',
             ])->default('admin');
             $table->rememberToken();
             $table->timestamp('created_at')->nullable();
